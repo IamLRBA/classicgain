@@ -1,4 +1,4 @@
-export const siteName = process.env.NEXT_PUBLIC_SITE_NAME ?? "Jaxon";
+export const siteName = process.env.NEXT_PUBLIC_SITE_NAME ?? "ClassicGain";
 
 /** Single destination for every link and CTA on this landing page */
 export const ctaUrl =
