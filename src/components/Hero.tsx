@@ -21,7 +21,7 @@ export function Hero() {
         </div>
         <p className="hero-hint">
           <MousePointer2 className="ui-icon" aria-hidden strokeWidth={1.75} />
-          Move or click the scene — coins follow you.
+          Move or click the scene — the lights follow you.
         </p>
       </div>
     </section>
