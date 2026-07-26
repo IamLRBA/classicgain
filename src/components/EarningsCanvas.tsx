@@ -8,19 +8,16 @@ type Particle = {
   vx: number;
   vy: number;
   r: number;
-  kind: "coin" | "bubble" | "spark";
+  kind: "orb" | "ring" | "spark";
   rot: number;
   spin: number;
   life: number;
   hue: number;
-  label?: string;
 };
 
-const BUBBLE_LABELS = ["hey 👋", "$5", "online", "earned!", "tap", "$$", "hi"];
-
 /**
- * Interactive full-bleed scene: coins orbit the cursor,
- * chat bubbles drift, sparks trail — the visual engine of the hero.
+ * Interactive full-bleed scene: soft orbs and sparks drift and
+ * gather toward the cursor — the visual engine of the hero.
  */
 export function EarningsCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -60,69 +57,48 @@ export function EarningsCanvas() {
     function makeParticle(x: number, y: number): Particle {
       const roll = Math.random();
       const kind: Particle["kind"] =
-        roll < 0.55 ? "coin" : roll < 0.85 ? "bubble" : "spark";
+        roll < 0.45 ? "orb" : roll < 0.75 ? "ring" : "spark";
       return {
         x,
         y,
         vx: (Math.random() - 0.5) * 0.6,
         vy: (Math.random() - 0.5) * 0.6 - 0.15,
-        r: kind === "bubble" ? 18 + Math.random() * 22 : 6 + Math.random() * 10,
+        r: kind === "ring" ? 10 + Math.random() * 16 : 4 + Math.random() * 10,
         kind,
         rot: Math.random() * Math.PI * 2,
-        spin: (Math.random() - 0.5) * 0.04,
+        spin: (Math.random() - 0.5) * 0.03,
         life: 1,
-        hue: kind === "coin" ? 75 + Math.random() * 30 : 195 + Math.random() * 40,
-        label:
-          kind === "bubble"
-            ? BUBBLE_LABELS[Math.floor(Math.random() * BUBBLE_LABELS.length)]
-            : undefined,
+        hue: 160 + Math.random() * 60,
       };
     }
 
-    function drawCoin(p: Particle) {
+    function drawOrb(p: Particle) {
       ctx!.save();
-      ctx!.translate(p.x, p.y);
-      ctx!.rotate(p.rot);
-      const g = ctx!.createRadialGradient(0, 0, 0, 0, 0, p.r);
-      g.addColorStop(0, `oklch(88% 0.18 ${p.hue})`);
-      g.addColorStop(1, `oklch(68% 0.16 ${p.hue})`);
+      const g = ctx!.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `oklch(86% 0.1 ${p.hue} / 0.55)`);
+      g.addColorStop(1, `oklch(78% 0.08 ${p.hue} / 0)`);
       ctx!.fillStyle = g;
       ctx!.beginPath();
-      ctx!.ellipse(0, 0, p.r, p.r * 0.72, 0, 0, Math.PI * 2);
+      ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx!.fill();
-      ctx!.strokeStyle = `oklch(55% 0.12 ${p.hue})`;
-      ctx!.lineWidth = 1.2;
-      ctx!.stroke();
-      ctx!.fillStyle = `oklch(40% 0.08 ${p.hue})`;
-      ctx!.font = `600 ${Math.max(8, p.r * 0.9)}px system-ui`;
-      ctx!.textAlign = "center";
-      ctx!.textBaseline = "middle";
-      ctx!.fillText("$", 0, 0.5);
       ctx!.restore();
     }
 
-    function drawBubble(p: Particle) {
+    function drawRing(p: Particle) {
       ctx!.save();
-      ctx!.globalAlpha = 0.88;
-      ctx!.fillStyle = "oklch(98% 0.02 200 / 0.85)";
-      ctx!.strokeStyle = "oklch(55% 0.08 200 / 0.35)";
-      ctx!.lineWidth = 1;
-      const bw = p.r * 2.2;
-      const bh = p.r * 1.15;
-      roundRect(ctx!, p.x - bw / 2, p.y - bh / 2, bw, bh, 14);
-      ctx!.fill();
+      ctx!.translate(p.x, p.y);
+      ctx!.rotate(p.rot);
+      ctx!.strokeStyle = `oklch(62% 0.1 ${p.hue} / 0.35)`;
+      ctx!.lineWidth = 1.25;
+      ctx!.beginPath();
+      ctx!.ellipse(0, 0, p.r, p.r * 0.62, 0, 0, Math.PI * 2);
       ctx!.stroke();
-      ctx!.fillStyle = "oklch(28% 0.04 230)";
-      ctx!.font = `500 ${Math.max(10, p.r * 0.55)}px system-ui`;
-      ctx!.textAlign = "center";
-      ctx!.textBaseline = "middle";
-      ctx!.fillText(p.label ?? "hi", p.x, p.y);
       ctx!.restore();
     }
 
     function drawSpark(p: Particle) {
       ctx!.save();
-      ctx!.fillStyle = `oklch(78% 0.2 ${p.hue} / ${0.4 + p.life * 0.4})`;
+      ctx!.fillStyle = `oklch(78% 0.14 ${p.hue} / ${0.35 + p.life * 0.4})`;
       ctx!.beginPath();
       ctx!.arc(p.x, p.y, p.r * 0.35, 0, Math.PI * 2);
       ctx!.fill();
@@ -132,7 +108,6 @@ export function EarningsCanvas() {
     function frame() {
       ctx!.clearRect(0, 0, w, h);
 
-      // soft atmospheric wash
       const wash = ctx!.createLinearGradient(0, 0, w, h);
       wash.addColorStop(0, "oklch(96% 0.03 195 / 0.55)");
       wash.addColorStop(0.5, "oklch(97% 0.04 95 / 0.35)");
@@ -140,7 +115,6 @@ export function EarningsCanvas() {
       ctx!.fillStyle = wash;
       ctx!.fillRect(0, 0, w, h);
 
-      // faint grid for "organized ledger" feel
       ctx!.strokeStyle = "oklch(40% 0.03 220 / 0.06)";
       ctx!.lineWidth = 1;
       const gap = 48;
@@ -178,8 +152,8 @@ export function EarningsCanvas() {
         if (p.y < -40) p.y = h + 40;
         if (p.y > h + 40) p.y = -40;
 
-        if (p.kind === "coin") drawCoin(p);
-        else if (p.kind === "bubble") drawBubble(p);
+        if (p.kind === "orb") drawOrb(p);
+        else if (p.kind === "ring") drawRing(p);
         else drawSpark(p);
       }
 
@@ -206,7 +180,7 @@ export function EarningsCanvas() {
         const p = makeParticle(x, y);
         p.vx = (Math.random() - 0.5) * 4;
         p.vy = (Math.random() - 0.5) * 4;
-        p.kind = i % 2 === 0 ? "coin" : "spark";
+        p.kind = i % 2 === 0 ? "orb" : "spark";
         particles.push(p);
         if (particles.length > 80) particles.shift();
       }
@@ -243,22 +217,4 @@ export function EarningsCanvas() {
       aria-hidden
     />
   );
-}
-
-function roundRect(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  r: number,
-) {
-  const rr = Math.min(r, w / 2, h / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + rr, y);
-  ctx.arcTo(x + w, y, x + w, y + h, rr);
-  ctx.arcTo(x + w, y + h, x, y + h, rr);
-  ctx.arcTo(x, y + h, x, y, rr);
-  ctx.arcTo(x, y, x + w, y, rr);
-  ctx.closePath();
 }

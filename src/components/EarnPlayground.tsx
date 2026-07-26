@@ -1,13 +1,38 @@
 "use client";
 
+import { CircleHelp, MessageCircle, Music2, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
 
 const ACTIONS = [
-  { id: "chat", label: "Send a chat", earn: 2.4, verb: "chatted" },
-  { id: "watch", label: "Watch a clip", earn: 1.8, verb: "watched" },
-  { id: "trivia", label: "Answer trivia", earn: 3.1, verb: "answered" },
-  { id: "stream", label: "Stream a track", earn: 2.0, verb: "streamed" },
+  {
+    id: "chat",
+    label: "Send a chat",
+    earn: 2.4,
+    verb: "chatted",
+    Icon: MessageCircle,
+  },
+  {
+    id: "watch",
+    label: "Watch a clip",
+    earn: 1.8,
+    verb: "watched",
+    Icon: Play,
+  },
+  {
+    id: "trivia",
+    label: "Answer trivia",
+    earn: 3.1,
+    verb: "answered",
+    Icon: CircleHelp,
+  },
+  {
+    id: "stream",
+    label: "Stream a track",
+    earn: 2.0,
+    verb: "streamed",
+    Icon: Music2,
+  },
 ] as const;
 
 /**
@@ -32,7 +57,9 @@ export function EarnPlayground() {
     setBurst(action.earn);
     setPulse(true);
     window.setTimeout(() => setPulse(false), 280);
-    setLog((prev) => [`You ${action.verb} · +$${action.earn.toFixed(1)}`, ...prev].slice(0, 4));
+    setLog((prev) =>
+      [`You ${action.verb} · +$${action.earn.toFixed(1)}`, ...prev].slice(0, 4),
+    );
   }
 
   return (
@@ -61,17 +88,23 @@ export function EarnPlayground() {
           </div>
 
           <div className="action-rail" role="group" aria-label="Demo earning actions">
-            {ACTIONS.map((action) => (
-              <button
-                key={action.id}
-                type="button"
-                className="action-chip"
-                onClick={() => mint(action)}
-              >
-                <span>{action.label}</span>
-                <span className="action-earn">+${action.earn.toFixed(1)}</span>
-              </button>
-            ))}
+            {ACTIONS.map((action) => {
+              const Icon = action.Icon;
+              return (
+                <button
+                  key={action.id}
+                  type="button"
+                  className="action-chip"
+                  onClick={() => mint(action)}
+                >
+                  <span className="action-chip-top">
+                    <Icon className="ui-icon" aria-hidden strokeWidth={1.75} />
+                    <span>{action.label}</span>
+                  </span>
+                  <span className="action-earn">+${action.earn.toFixed(1)}</span>
+                </button>
+              );
+            })}
           </div>
 
           <ul className="earn-log" aria-live="polite">

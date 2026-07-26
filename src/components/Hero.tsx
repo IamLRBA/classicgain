@@ -1,3 +1,4 @@
+import { MousePointer2 } from "lucide-react";
 import { siteName } from "@/lib/config";
 import { EarningsCanvas } from "./EarningsCanvas";
 import { MagneticButton } from "./MagneticButton";
@@ -18,7 +19,10 @@ export function Hero() {
           <MagneticButton>Tap to start</MagneticButton>
           <MagneticButton variant="ghost">See how it works</MagneticButton>
         </div>
-        <p className="hero-hint">Move or click the scene — coins follow you.</p>
+        <p className="hero-hint">
+          <MousePointer2 className="ui-icon" aria-hidden strokeWidth={1.75} />
+          Move or click the scene — the lights follow you.
+        </p>
       </div>
     </section>
   );
