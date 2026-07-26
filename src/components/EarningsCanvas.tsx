@@ -16,7 +16,7 @@ type Particle = {
   label?: string;
 };
 
-const BUBBLE_LABELS = ["hey 👋", "$5", "online", "earned!", "tap", "$$", "hi"];
+const BUBBLE_LABELS = ["hey", "$5", "online", "earned!", "tap", "hi"];
 
 /**
  * Interactive full-bleed scene: coins orbit the cursor,

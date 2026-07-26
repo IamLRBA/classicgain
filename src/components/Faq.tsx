@@ -1,5 +1,6 @@
 "use client";
 
+import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { siteName } from "@/lib/config";
 import { MagneticButton } from "./MagneticButton";
@@ -53,7 +54,11 @@ export function Faq() {
                 >
                   <span>{item.q}</span>
                   <span className="faq-icon" aria-hidden>
-                    {isOpen ? "−" : "+"}
+                    {isOpen ? (
+                      <Minus className="ui-icon" strokeWidth={2} />
+                    ) : (
+                      <Plus className="ui-icon" strokeWidth={2} />
+                    )}
                   </span>
                 </button>
                 <div className="faq-panel">
