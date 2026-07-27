@@ -109,7 +109,7 @@ export function EarningsCanvas() {
     }
 
     function gridAlphaAt(px: number, py: number) {
-      const base = 0.05;
+      const base = 0.028;
       if (!pointer.active && reduced) return base;
 
       let boost = 0;
@@ -124,35 +124,42 @@ export function EarningsCanvas() {
       const wellA = Math.hypot(px - w * 0.22, py - h * 0.28);
       const wellB = Math.hypot(px - w * 0.78, py - h * 0.62);
       const staticBoost =
-        Math.max(0, 1 - wellA / (Math.min(w, h) * 0.55)) * 0.35 +
-        Math.max(0, 1 - wellB / (Math.min(w, h) * 0.5)) * 0.28;
+        Math.max(0, 1 - wellA / (Math.min(w, h) * 0.55)) * 0.22 +
+        Math.max(0, 1 - wellB / (Math.min(w, h) * 0.5)) * 0.16;
 
-      return Math.min(0.55, base + boost * 0.42 + staticBoost * 0.18);
+      return Math.min(0.55, base + boost * 0.42 + staticBoost * 0.12);
     }
 
     function drawGrid() {
       const gap = 48;
+      const shiftY = -gap * 2;
+
+      ctx!.save();
+      ctx!.translate(0, shiftY);
 
       for (let x = 0; x < w; x += gap) {
-        for (let y = 0; y < h; y += gap) {
-          const a1 = gridAlphaAt(x, y + gap / 2);
-          const a2 = gridAlphaAt(x + gap / 2, y);
+        for (let y = 0; y < h + gap * 2; y += gap) {
+          const screenY = y + shiftY;
+          const a1 = gridAlphaAt(x, screenY + gap / 2);
+          const a2 = gridAlphaAt(x + gap / 2, screenY);
 
           ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a1})`;
-          ctx!.lineWidth = 1 + a1 * 1.4;
+          ctx!.lineWidth = 1 + a1 * 1.6;
           ctx!.beginPath();
           ctx!.moveTo(x, y);
-          ctx!.lineTo(x, Math.min(y + gap, h));
+          ctx!.lineTo(x, y + gap);
           ctx!.stroke();
 
           ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a2})`;
-          ctx!.lineWidth = 1 + a2 * 1.4;
+          ctx!.lineWidth = 1 + a2 * 1.6;
           ctx!.beginPath();
           ctx!.moveTo(x, y);
-          ctx!.lineTo(Math.min(x + gap, w), y);
+          ctx!.lineTo(x + gap, y);
           ctx!.stroke();
         }
       }
+
+      ctx!.restore();
     }
 
     function frame() {
@@ -161,23 +168,6 @@ export function EarningsCanvas() {
       // Clean white field behind the grid
       ctx!.fillStyle = "#ffffff";
       ctx!.fillRect(0, 0, w, h);
-
-      // Soft dark-green wash near cursor (not a full green fill)
-      if (pointer.active && !reduced) {
-        const glow = ctx!.createRadialGradient(
-          pointer.x,
-          pointer.y,
-          0,
-          pointer.x,
-          pointer.y,
-          Math.min(w, h) * 0.38,
-        );
-        glow.addColorStop(0, `oklch(32% 0.06 ${hueInk} / 0.1)`);
-        glow.addColorStop(0.55, `oklch(36% 0.05 ${hueInk} / 0.04)`);
-        glow.addColorStop(1, `oklch(40% 0.04 ${hueInk} / 0)`);
-        ctx!.fillStyle = glow;
-        ctx!.fillRect(0, 0, w, h);
-      }
 
       drawGrid();
 

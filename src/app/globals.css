@@ -261,6 +261,9 @@ em {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Shift up by two horizontal grid cells (matches canvas gap) */
+  --hero-grid-gap: 96px;
+  transform: translateY(calc(-1 * var(--hero-grid-gap)));
 }
 
 .brand-hero {
@@ -270,7 +273,7 @@ em {
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.92;
-  color: var(--ink);
+  color: var(--color-brand-light);
 }
 
 .hero-title {
@@ -291,7 +294,8 @@ em {
 
 .hero-title-lead {
   display: block;
-  color: var(--ink);
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 
 .rotating-phrase {
@@ -299,7 +303,7 @@ em {
   align-items: baseline;
   justify-content: center;
   min-height: 1.2em;
-  color: var(--ink);
+  color: var(--color-primary);
   vertical-align: baseline;
 }
 
@@ -325,7 +329,7 @@ em {
   width: 0.08em;
   height: 0.9em;
   margin-left: 0.12em;
-  background: var(--ink);
+  background: var(--color-primary);
   vertical-align: -0.05em;
   animation: caret-blink 1s steps(1) infinite;
 }
@@ -338,6 +342,17 @@ em {
   50%,
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(calc(28px - var(--hero-grid-gap, 96px)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(calc(-1 * var(--hero-grid-gap, 96px)));
   }
 }
 
@@ -385,18 +400,6 @@ em {
 .hero-hint .ui-icon {
   width: 0.95rem;
   height: 0.95rem;
-}
-
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Sections */
