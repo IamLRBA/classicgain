@@ -90,8 +90,7 @@ export function Testimonials() {
               Voices from <em>Uganda</em>
             </h2>
             <p className="section-lead">
-              Side hustle stories from Kampala to Gulu. Names and quotes are
-              sample content for the layout.
+              Side hustle stories from Kampala to Gulu.
             </p>
           </div>
 

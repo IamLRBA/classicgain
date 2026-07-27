@@ -281,13 +281,14 @@ em {
 
 .hero h1 {
   margin: 0;
-  max-width: 18ch;
+  max-width: 22ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.55rem, 4.2vw, 2.65rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.15;
   color: var(--ink-soft);
+  text-align: center;
 }
 
 .rotating-phrase {
@@ -362,6 +363,7 @@ em {
   margin-top: 1.75rem;
   pointer-events: auto;
   width: 100%;
+  max-width: 28rem;
 }
 
 .hero-hint {
@@ -379,24 +381,6 @@ em {
   height: 0.95rem;
 }
 
-@media (min-width: 768px) {
-  .hero-content {
-    text-align: left;
-    align-items: flex-start;
-  }
-
-  .hero-actions {
-    justify-content: flex-start;
-  }
-
-  .hero-hint {
-    justify-content: flex-start;
-  }
-
-  .hero h1 {
-    max-width: 14ch;
-  }
-}
 
 @keyframes rise {
   from {
@@ -546,12 +530,10 @@ em {
 
 .services .section-intro {
   text-align: center;
-}
-
-@media (min-width: 768px) {
-  .services .section-intro {
-    text-align: left;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
 }
 
 .services-head {
@@ -560,35 +542,20 @@ em {
   align-items: center;
   text-align: center;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .services-head .section-title {
   max-width: 18ch;
-}
-
-@media (min-width: 768px) {
-  .services .section-intro {
-    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
-  }
-
-  .services-head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    text-align: left;
-    width: 100%;
-  }
-
-  .services-head .section-title {
-    text-align: left;
-    margin-inline: 0;
-  }
+  margin-inline: auto;
+  text-align: center;
 }
 
 .service-list {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 52rem;
   border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
 }
 
@@ -1066,23 +1033,6 @@ em {
 }
 
 @media (min-width: 768px) {
-  .testimonials-head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    text-align: left;
-  }
-
-  .testimonials-head .section-intro {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .testimonials-head .section-title,
-  .testimonials-head .section-lead {
-    margin-inline: 0;
-  }
-
   .testimonial-card {
     flex-basis: 24rem;
   }
