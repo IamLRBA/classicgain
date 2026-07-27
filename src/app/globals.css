@@ -281,13 +281,70 @@ em {
 
 .hero h1 {
   margin: 0;
-  max-width: 16ch;
+  max-width: 18ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.55rem, 4.2vw, 2.65rem);
   font-weight: 650;
   letter-spacing: -0.035em;
-  line-height: 1.12;
+  line-height: 1.15;
   color: var(--ink-soft);
+}
+
+.rotating-phrase {
+  display: inline-flex;
+  align-items: baseline;
+  min-height: 1.2em;
+  color: var(--color-primary-deep);
+  vertical-align: baseline;
+}
+
+.rotating-phrase-text {
+  display: inline-block;
+  transition:
+    opacity 280ms var(--ease-out),
+    transform 280ms var(--ease-out);
+}
+
+.rotating-phrase-text.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rotating-phrase-text.is-out {
+  opacity: 0;
+  transform: translateY(0.35em);
+}
+
+.rotating-phrase-caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  margin-left: 0.12em;
+  background: var(--color-primary);
+  vertical-align: -0.05em;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-phrase-text {
+    transition: none;
+  }
+
+  .rotating-phrase-caret {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 .hero-sub {
