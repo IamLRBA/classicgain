@@ -695,11 +695,6 @@ em {
   border-color: color-mix(in oklch, var(--ink-inverse) 45%, transparent);
 }
 
-.how {
-  /* Uses shared .section-ink */
-}
-
-.steps {
   display: grid;
   gap: 1.75rem;
   margin-top: 0.25rem;
