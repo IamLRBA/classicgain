@@ -23,11 +23,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: clip;
   color: var(--ink);
   background:
     radial-gradient(
@@ -90,36 +92,40 @@ em {
   font-weight: 650;
   letter-spacing: 0.01em;
   transition:
-    transform 200ms var(--ease-out),
-    background 200ms var(--ease-out),
-    color 200ms var(--ease-out),
-    box-shadow 200ms var(--ease-out);
+    transform 160ms var(--ease-out),
+    background 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
 }
 
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-primary-deep)
-  );
+  background: var(--color-primary);
   color: var(--color-primary-ink);
-  box-shadow: 0 10px 28px color-mix(in oklch, var(--color-primary) 35%, transparent);
+  border: 1px solid var(--color-primary-deep);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 34px color-mix(in oklch, var(--color-primary) 45%, transparent);
+  background: var(--color-primary-deep);
+  color: var(--ink-inverse);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 .btn-ghost {
-  background: color-mix(in oklch, var(--paper) 55%, transparent);
-  border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  background: var(--paper);
+  border: 1px solid color-mix(in oklch, var(--ink) 14%, transparent);
   color: var(--ink);
-  backdrop-filter: blur(8px);
 }
 
 .btn-ghost:hover {
-  background: color-mix(in oklch, var(--paper) 90%, white);
+  background: var(--color-brand-soft);
+  border-color: color-mix(in oklch, var(--color-brand) 35%, transparent);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
 }
 
 /* ——— Header ——— */
@@ -133,6 +139,9 @@ em {
   gap: 0.75rem 1rem;
   width: 100%;
   padding: 0.85rem var(--page-x);
+  padding-top: max(0.85rem, env(safe-area-inset-top));
+  padding-left: max(var(--page-x), env(safe-area-inset-left));
+  padding-right: max(var(--page-x), env(safe-area-inset-right));
   background: color-mix(in oklch, var(--paper) 78%, transparent);
   border-bottom: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
   backdrop-filter: blur(14px);
@@ -200,6 +209,44 @@ em {
   align-items: end;
   overflow: clip;
   border-bottom: 1px solid color-mix(in oklch, var(--line) 65%, transparent);
+}
+
+@media (max-width: 479px) {
+  .brand-hero {
+    font-size: clamp(2.2rem, 12vw, 3rem);
+    word-break: break-word;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions > span,
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
+    min-height: 2.85rem;
+  }
+
+  .header-cta {
+    padding-inline: 0.85rem !important;
+    font-size: 0.82rem !important;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .hero {
+    min-height: min(92svh, 44rem);
+  }
+
+  .hero-actions {
+    max-width: 28rem;
+  }
 }
 
 .hero-veil {
@@ -622,6 +669,9 @@ em {
   margin-top: 2.5rem;
   display: grid;
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid color-mix(in oklch, var(--ink) 10%, transparent);
   border-radius: 1.75rem;
@@ -899,13 +949,14 @@ em {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-height: 3rem;
   padding: 1.15rem 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   font: inherit;
   font-family: var(--font-display), sans-serif;
-  font-size: 1.15rem;
+  font-size: clamp(1.02rem, 2.4vw, 1.15rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   text-align: left;
@@ -952,6 +1003,7 @@ em {
 
 .site-footer {
   margin-top: 2rem;
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
 }
 
 .footer-band {
