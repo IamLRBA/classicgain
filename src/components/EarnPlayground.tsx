@@ -1,5 +1,6 @@
 "use client";
 
+import { formatUgx } from "@/lib/money";
 import { CircleHelp, MessageCircle, Music2, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
@@ -8,28 +9,28 @@ const ACTIONS = [
   {
     id: "chat",
     label: "Send a chat",
-    earn: 2.4,
+    earn: 8500,
     verb: "chatted",
     Icon: MessageCircle,
   },
   {
     id: "watch",
     label: "Watch a clip",
-    earn: 1.8,
+    earn: 3200,
     verb: "watched",
     Icon: Play,
   },
   {
     id: "trivia",
     label: "Answer trivia",
-    earn: 3.1,
+    earn: 12000,
     verb: "answered",
     Icon: CircleHelp,
   },
   {
     id: "stream",
     label: "Stream a track",
-    earn: 2.0,
+    earn: 2500,
     verb: "streamed",
     Icon: Music2,
   },
@@ -53,12 +54,12 @@ export function EarnPlayground() {
   }, [burst]);
 
   function mint(action: (typeof ACTIONS)[number]) {
-    setBalance((b) => Math.round((b + action.earn) * 10) / 10);
+    setBalance((b) => b + action.earn);
     setBurst(action.earn);
     setPulse(true);
     window.setTimeout(() => setPulse(false), 280);
     setLog((prev) =>
-      [`You ${action.verb} · +$${action.earn.toFixed(1)}`, ...prev].slice(0, 4),
+      [`You ${action.verb} · +${formatUgx(action.earn)}`, ...prev].slice(0, 4),
     );
   }
 
@@ -80,11 +81,11 @@ export function EarnPlayground() {
           <div className={`balance-orb ${pulse ? "is-pulse" : ""}`}>
             <span className="balance-label">Demo balance</span>
             <span ref={displayRef} className="balance-value">
-              ${balance.toFixed(1)}
+              {formatUgx(balance)}
             </span>
             {burst !== null && (
               <span className="balance-burst" key={burst + balance}>
-                +${burst.toFixed(1)}
+                +{formatUgx(burst)}
               </span>
             )}
           </div>
@@ -103,7 +104,7 @@ export function EarnPlayground() {
                     <Icon className="ui-icon" aria-hidden strokeWidth={1.75} />
                     <span>{action.label}</span>
                   </span>
-                  <span className="action-earn">+${action.earn.toFixed(1)}</span>
+                  <span className="action-earn">+{formatUgx(action.earn)}</span>
                 </button>
               );
             })}

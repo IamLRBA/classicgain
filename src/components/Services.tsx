@@ -16,25 +16,25 @@ const SERVICES: {
   {
     title: "Chat & get paid",
     copy: "Message people who want company. No camera required, just conversation.",
-    meta: "Up to $20 / hr",
+    meta: "Up to UGX 50,000/hr",
     Icon: MessageCircle,
   },
   {
     title: "Watch short clips",
     copy: "Short videos. Short sessions. Earnings stack while you stay active.",
-    meta: "Per video",
+    meta: "Up to UGX 12,000/day",
     Icon: Play,
   },
   {
     title: "Answer trivia",
     copy: "Quick challenges that reward focus. Perfect between chats.",
-    meta: "Daily boosts",
+    meta: "Win up to UGX 100,000",
     Icon: CircleHelp,
   },
   {
     title: "Stream music",
     copy: "Keep tracks spinning for creators and collect micropayouts as you go.",
-    meta: "Live streams",
+    meta: "Up to UGX 8,000/day",
     Icon: Music2,
   },
 ];
