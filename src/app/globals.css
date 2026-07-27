@@ -1053,20 +1053,41 @@ em {
   animation: marquee 32s linear infinite;
 }
 
-.region-marquee a {
+.region-marquee a,
+.region-flag-link {
   display: inline-flex;
-  padding: 0.65rem 1.1rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 1rem 0.55rem 0.65rem;
   border-radius: 999px;
   border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
-  background: color-mix(in oklch, var(--surface) 50%, transparent);
+  background: var(--paper);
   font-size: 0.92rem;
   font-weight: 600;
   white-space: nowrap;
-  transition: background 180ms var(--ease-out);
+  transition:
+    background 180ms var(--ease-out),
+    border-color 180ms var(--ease-out);
 }
 
-.region-marquee a:hover {
-  background: var(--color-brand-soft);
+.region-flag {
+  width: 2.1rem;
+  height: 1.55rem;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  background: var(--grey-soft);
+  flex-shrink: 0;
+}
+
+.region-flag-name {
+  font-size: 0.88rem;
+}
+
+.region-marquee a:hover,
+.region-flag-link:hover {
+  background: var(--grey-soft);
+  border-color: color-mix(in oklch, var(--ink) 18%, transparent);
 }
 
 @keyframes marquee {

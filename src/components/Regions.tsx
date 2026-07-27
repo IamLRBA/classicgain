@@ -1,18 +1,18 @@
 import { CtaLink } from "./CtaLink";
 
 const REGIONS = [
-  "Uganda",
-  "Kenya",
-  "Tanzania",
-  "Nigeria",
-  "Ghana",
-  "Zambia",
-  "South Africa",
-  "Rwanda",
-  "USA",
-  "Canada",
-  "UAE",
-  "India",
+  { name: "Uganda", code: "ug" },
+  { name: "Kenya", code: "ke" },
+  { name: "Tanzania", code: "tz" },
+  { name: "Nigeria", code: "ng" },
+  { name: "Ghana", code: "gh" },
+  { name: "Zambia", code: "zm" },
+  { name: "South Africa", code: "za" },
+  { name: "Rwanda", code: "rw" },
+  { name: "USA", code: "us" },
+  { name: "Canada", code: "ca" },
+  { name: "UAE", code: "ae" },
+  { name: "India", code: "in" },
 ];
 
 export function Regions() {
@@ -32,9 +32,18 @@ export function Regions() {
 
         <div className="region-track">
           <ul className="region-marquee" aria-label="Supported countries">
-            {[...REGIONS, ...REGIONS].map((name, i) => (
-              <li key={`${name}-${i}`}>
-                <CtaLink>{name}</CtaLink>
+            {[...REGIONS, ...REGIONS].map((region, i) => (
+              <li key={`${region.code}-${i}`}>
+                <CtaLink className="region-flag-link" ariaLabel={region.name}>
+                  <img
+                    className="region-flag"
+                    src={`/images/flags/${region.code}.svg`}
+                    alt={region.name}
+                    width={48}
+                    height={36}
+                  />
+                  <span className="region-flag-name">{region.name}</span>
+                </CtaLink>
               </li>
             ))}
           </ul>
