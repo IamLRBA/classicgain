@@ -1,5 +1,6 @@
 "use client";
 
+import { hues, readCssHue } from "@/lib/colors";
 import { useEffect, useRef } from "react";
 
 type Particle = {
@@ -54,10 +55,14 @@ export function EarningsCanvas() {
       }
     }
 
+    const hueTeal = readCssHue("--hue-teal", hues.teal);
+    const hueTerracotta = readCssHue("--hue-terracotta", hues.terracotta);
+
     function makeParticle(x: number, y: number): Particle {
       const roll = Math.random();
       const kind: Particle["kind"] =
         roll < 0.45 ? "orb" : roll < 0.75 ? "ring" : "spark";
+      const useTerracotta = Math.random() > 0.62;
       return {
         x,
         y,
@@ -68,7 +73,7 @@ export function EarningsCanvas() {
         rot: Math.random() * Math.PI * 2,
         spin: (Math.random() - 0.5) * 0.03,
         life: 1,
-        hue: 160 + Math.random() * 60,
+        hue: useTerracotta ? hueTerracotta : hueTeal,
       };
     }
 
@@ -109,13 +114,13 @@ export function EarningsCanvas() {
       ctx!.clearRect(0, 0, w, h);
 
       const wash = ctx!.createLinearGradient(0, 0, w, h);
-      wash.addColorStop(0, "oklch(96% 0.03 195 / 0.55)");
-      wash.addColorStop(0.5, "oklch(97% 0.04 95 / 0.35)");
-      wash.addColorStop(1, "oklch(94% 0.05 150 / 0.5)");
+      wash.addColorStop(0, `oklch(96% 0.03 ${hueTeal} / 0.55)`);
+      wash.addColorStop(0.5, `oklch(97% 0.04 ${hueTerracotta} / 0.35)`);
+      wash.addColorStop(1, `oklch(94% 0.04 ${hueTeal} / 0.5)`);
       ctx!.fillStyle = wash;
       ctx!.fillRect(0, 0, w, h);
 
-      ctx!.strokeStyle = "oklch(40% 0.03 220 / 0.06)";
+      ctx!.strokeStyle = `oklch(40% 0.03 ${hueTeal} / 0.06)`;
       ctx!.lineWidth = 1;
       const gap = 48;
       for (let x = 0; x < w; x += gap) {
