@@ -241,18 +241,12 @@ em {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      transparent 20%,
-      color-mix(in oklch, var(--paper) 55%, transparent) 70%,
-      var(--paper) 100%
-    ),
-    radial-gradient(
-      60% 50% at 20% 70%,
-      color-mix(in oklch, var(--color-brand-soft) 65%, transparent),
-      transparent 70%
-    );
+  background: linear-gradient(
+    180deg,
+    transparent 20%,
+    color-mix(in oklch, #ffffff 55%, transparent) 70%,
+    #ffffff 100%
+  );
 }
 
 .hero-content {
@@ -267,6 +261,9 @@ em {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Shift up by two horizontal grid cells (matches canvas gap) */
+  --hero-grid-gap: 96px;
+  transform: translateY(calc(-1 * var(--hero-grid-gap)));
 }
 
 .brand-hero {
@@ -276,44 +273,44 @@ em {
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.92;
-  color: var(--ink);
+  color: var(--color-brand-deep);
 }
 
-.hero h1 {
+.hero-title {
   margin: 0;
-  max-width: 22ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 18ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.55rem, 4.2vw, 2.65rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.15;
-  color: var(--ink-soft);
+  color: var(--ink);
   text-align: center;
+}
+
+.hero-title-lead {
+  display: block;
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 
 .rotating-phrase {
   display: inline-flex;
   align-items: baseline;
+  justify-content: center;
   min-height: 1.2em;
-  color: var(--color-primary-deep);
+  color: var(--color-primary);
   vertical-align: baseline;
 }
 
 .rotating-phrase-text {
   display: inline-block;
-  transition:
-    opacity 280ms var(--ease-out),
-    transform 280ms var(--ease-out);
-}
-
-.rotating-phrase-text.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.rotating-phrase-text.is-out {
-  opacity: 0;
-  transform: translateY(0.35em);
+  white-space: pre;
+  min-height: 1.2em;
 }
 
 .rotating-phrase-caret {
@@ -337,11 +334,18 @@ em {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .rotating-phrase-text {
-    transition: none;
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(calc(28px - var(--hero-grid-gap, 96px)));
   }
+  to {
+    opacity: 1;
+    transform: translateY(calc(-1 * var(--hero-grid-gap, 96px)));
+  }
+}
 
+@media (prefers-reduced-motion: reduce) {
   .rotating-phrase-caret {
     animation: none;
     opacity: 1;
@@ -351,8 +355,9 @@ em {
 .hero-sub {
   margin: 1.1rem 0 0;
   max-width: 38ch;
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: clamp(1rem, 1.6vw, 1.15rem);
+  opacity: 0.78;
 }
 
 .hero-actions {
@@ -373,24 +378,13 @@ em {
   justify-content: center;
   gap: 0.45rem;
   font-size: 0.85rem;
-  color: color-mix(in oklch, var(--ink-soft) 75%, transparent);
+  color: var(--ink);
+  opacity: 0.65;
 }
 
 .hero-hint .ui-icon {
   width: 0.95rem;
   height: 0.95rem;
-}
-
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Sections */
@@ -818,17 +812,16 @@ em {
   gap: 0.35rem;
   text-align: center;
   border-radius: 50%;
-  background: var(--grey-soft);
-  border: 2px solid color-mix(in oklch, var(--ink) 12%, transparent);
-  box-shadow:
-    inset 0 0 0 8px var(--paper),
-    0 0 0 1px color-mix(in oklch, var(--ink) 8%, transparent);
+  background: var(--ink);
+  border: 2px solid color-mix(in oklch, var(--ink-inverse) 18%, transparent);
+  box-shadow: inset 0 0 0 8px color-mix(in oklch, var(--ink-inverse) 6%, transparent);
+  color: var(--ink-inverse);
   transition: transform 280ms var(--ease-out);
 }
 
 .balance-orb.is-pulse {
   transform: scale(1.03);
-  background: var(--color-primary-soft);
+  background: var(--color-brand-deep);
 }
 
 .balance-label {
@@ -836,7 +829,7 @@ em {
   font-weight: 650;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--ink-inverse-soft);
 }
 
 .balance-value {
@@ -846,6 +839,7 @@ em {
   letter-spacing: -0.04em;
   line-height: 1.15;
   max-width: 11ch;
+  color: var(--ink-inverse);
 }
 
 .balance-burst {
@@ -853,7 +847,7 @@ em {
   top: 18%;
   right: 16%;
   font-weight: 750;
-  color: var(--color-primary-deep);
+  color: var(--color-primary-light);
   animation: float-up 600ms var(--ease-out) both;
 }
 
@@ -1271,11 +1265,7 @@ em {
   margin: 0 auto 2rem;
   padding: clamp(2rem, 5vw, 3.25rem);
   border-radius: 1.75rem;
-  background: linear-gradient(
-    120deg,
-    var(--color-brand-deep),
-    var(--ink)
-  );
+  background: var(--ink);
   color: var(--ink-inverse);
   display: flex;
   flex-direction: column;

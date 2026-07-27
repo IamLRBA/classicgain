@@ -11,8 +11,8 @@ export function Hero() {
       <div className="hero-veil" aria-hidden />
       <div className="hero-content">
         <p className="brand-hero">{siteName}</p>
-        <h1>
-          Get paid to do{" "}
+        <h1 className="hero-title">
+          <span className="hero-title-lead">Get paid to:</span>
           <RotatingPhrase />
         </h1>
         <p className="hero-sub">
