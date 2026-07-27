@@ -1,5 +1,6 @@
 import { siteName } from "@/lib/config";
 import { CtaLink } from "./CtaLink";
+import { MagneticButton } from "./MagneticButton";
 
 export function Footer() {
   return (
@@ -8,7 +9,7 @@ export function Footer() {
         <h2>
           Your phone. <em>Your office.</em>
         </h2>
-        <CtaLink className="btn-primary">Create free account</CtaLink>
+        <MagneticButton>Create free account</MagneticButton>
       </div>
       <div className="footer-bar">
         <CtaLink className="brand-mark">
