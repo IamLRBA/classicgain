@@ -15,7 +15,7 @@ const SERVICES: {
 }[] = [
   {
     title: "Chat & get paid",
-    copy: "Message people who want company. No camera required — just conversation.",
+    copy: "Message people who want company. No camera required, just conversation.",
     meta: "Up to $20 / hr",
     Icon: MessageCircle,
   },

@@ -3,7 +3,7 @@ import { MagneticButton } from "./MagneticButton";
 const STEPS = [
   {
     title: "Create your account",
-    copy: "Username, phone, email, country — under a minute.",
+    copy: "Username, phone, email, country. Under a minute.",
   },
   {
     title: "Link & go live",

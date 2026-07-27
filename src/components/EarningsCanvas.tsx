@@ -18,7 +18,7 @@ type Particle = {
 
 /**
  * Interactive full-bleed scene: soft orbs and sparks drift and
- * gather toward the cursor — the visual engine of the hero.
+ * gather toward the cursor. The visual engine of the hero.
  */
 export function EarningsCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);

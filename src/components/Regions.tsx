@@ -25,7 +25,7 @@ export function Regions() {
             Built for phones <em>everywhere</em>
           </h2>
           <p className="section-lead">
-            East Africa to North America — same product, local mobile money where
+            East Africa to North America. Same product, local mobile money where
             it matters.
           </p>
         </div>

@@ -119,7 +119,7 @@ em {
   transform: scale(0.98);
 }
 
-/* ——— Header ——— */
+/* Header */
 .site-header {
   position: sticky;
   top: 0;
@@ -187,7 +187,7 @@ em {
   }
 }
 
-/* ——— Hero ——— */
+/* Hero */
 .hero {
   position: relative;
   isolation: isolate;
@@ -352,7 +352,7 @@ em {
   }
 }
 
-/* ——— Sections ——— */
+/* Sections */
 .section {
   padding: var(--section-y) 0;
 }
