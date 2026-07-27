@@ -273,7 +273,7 @@ em {
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.92;
-  color: var(--color-brand-light);
+  color: var(--color-brand-deep);
 }
 
 .hero-title {
@@ -309,19 +309,8 @@ em {
 
 .rotating-phrase-text {
   display: inline-block;
-  transition:
-    opacity 280ms var(--ease-out),
-    transform 280ms var(--ease-out);
-}
-
-.rotating-phrase-text.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.rotating-phrase-text.is-out {
-  opacity: 0;
-  transform: translateY(0.35em);
+  white-space: pre;
+  min-height: 1.2em;
 }
 
 .rotating-phrase-caret {
@@ -357,10 +346,6 @@ em {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rotating-phrase-text {
-    transition: none;
-  }
-
   .rotating-phrase-caret {
     animation: none;
     opacity: 1;

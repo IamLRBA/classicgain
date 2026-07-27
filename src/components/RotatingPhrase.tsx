@@ -11,30 +11,50 @@ const PHRASES = [
   "Stream Short Clips",
 ];
 
+type Phase = "typing" | "holding" | "deleting";
+
 export function RotatingPhrase() {
   const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [text, setText] = useState("");
+  const [phase, setPhase] = useState<Phase>("typing");
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (reduced) {
+      setText(PHRASES[0]);
+      return;
+    }
 
-    const id = window.setInterval(() => {
-      setVisible(false);
-      window.setTimeout(() => {
+    const full = PHRASES[index];
+    let timer = 0;
+
+    if (phase === "typing") {
+      if (text.length < full.length) {
+        timer = window.setTimeout(() => {
+          setText(full.slice(0, text.length + 1));
+        }, 55);
+      } else {
+        timer = window.setTimeout(() => setPhase("holding"), 1600);
+      }
+    } else if (phase === "holding") {
+      timer = window.setTimeout(() => setPhase("deleting"), 40);
+    } else if (phase === "deleting") {
+      if (text.length > 0) {
+        timer = window.setTimeout(() => {
+          setText(text.slice(0, -1));
+        }, 32);
+      } else {
         setIndex((i) => (i + 1) % PHRASES.length);
-        setVisible(true);
-      }, 280);
-    }, 2800);
+        setPhase("typing");
+      }
+    }
 
-    return () => window.clearInterval(id);
-  }, []);
+    return () => window.clearTimeout(timer);
+  }, [index, phase, text]);
 
   return (
     <span className="rotating-phrase" aria-live="polite">
-      <span className={`rotating-phrase-text ${visible ? "is-in" : "is-out"}`}>
-        {PHRASES[index]}
-      </span>
+      <span className="rotating-phrase-text">{text}</span>
       <span className="rotating-phrase-caret" aria-hidden />
     </span>
   );
