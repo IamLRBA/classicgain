@@ -863,9 +863,15 @@ em {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .action-rail {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .action-rail {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

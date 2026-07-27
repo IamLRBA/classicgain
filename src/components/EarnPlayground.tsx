@@ -1,38 +1,83 @@
 "use client";
 
 import { formatUgx } from "@/lib/money";
-import { CircleHelp, MessageCircle, Music2, Play } from "lucide-react";
+import {
+  Clapperboard,
+  CircleHelp,
+  Dices,
+  Gamepad2,
+  ListChecks,
+  MessageCircle,
+  Music2,
+  Play,
+  Users,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
 
 const ACTIONS = [
   {
     id: "chat",
-    label: "Send a chat",
+    label: "Chat with someone",
     earn: 8500,
     verb: "chatted",
     Icon: MessageCircle,
   },
   {
-    id: "watch",
-    label: "Watch a clip",
+    id: "tiktok",
+    label: "Watch TikTok clips",
     earn: 3200,
-    verb: "watched",
+    verb: "watched clips",
     Icon: Play,
   },
   {
-    id: "trivia",
-    label: "Answer trivia",
-    earn: 12000,
-    verb: "answered",
-    Icon: CircleHelp,
+    id: "movie",
+    label: "Watch a movie",
+    earn: 15000,
+    verb: "watched a movie",
+    Icon: Clapperboard,
   },
   {
     id: "stream",
-    label: "Stream a track",
+    label: "Listen to music",
     earn: 2500,
-    verb: "streamed",
+    verb: "streamed music",
     Icon: Music2,
+  },
+  {
+    id: "survey",
+    label: "Complete a survey",
+    earn: 18000,
+    verb: "finished a survey",
+    Icon: ListChecks,
+  },
+  {
+    id: "trivia",
+    label: "Play trivia",
+    earn: 12000,
+    verb: "won trivia",
+    Icon: CircleHelp,
+  },
+  {
+    id: "spin",
+    label: "Spin and win",
+    earn: 20000,
+    verb: "spun the wheel",
+    Icon: Dices,
+  },
+  {
+    id: "games",
+    label: "Play a game",
+    earn: 5000,
+    verb: "played a game",
+    Icon: Gamepad2,
+  },
+  {
+    id: "refer",
+    label: "Refer a friend",
+    earn: 10000,
+    verb: "referred a friend",
+    Icon: Users,
   },
 ] as const;
 
@@ -59,7 +104,7 @@ export function EarnPlayground() {
     setPulse(true);
     window.setTimeout(() => setPulse(false), 280);
     setLog((prev) =>
-      [`You ${action.verb} · +${formatUgx(action.earn)}`, ...prev].slice(0, 4),
+      [`You ${action.verb} · +${formatUgx(action.earn)}`, ...prev].slice(0, 5),
     );
   }
 
@@ -72,8 +117,8 @@ export function EarnPlayground() {
             Tap. Earn. <em>Smile.</em>
           </h2>
           <p className="section-lead">
-            A tiny demo of the loop. Press an action, watch your balance grow, then
-            jump in for real.
+            Nine ways to demo the loop. Press an action, watch your UGX balance
+            grow, then jump in for real.
           </p>
         </div>
 
