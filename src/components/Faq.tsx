@@ -8,11 +8,11 @@ import { MagneticButton } from "./MagneticButton";
 const FAQS = [
   {
     q: "How do I get paid?",
-    a: "Payouts go to mobile money on the phone number you register with. Withdraw when you're ready, with no artificial daily ceiling on the product side.",
+    a: "Payouts go to mobile money (MTN and Airtel) on the number you register with. Minimum withdrawal is UGX 18,000.",
   },
   {
     q: "How much can I earn in a day?",
-    a: "It scales with how active you stay. Chat sessions, clips, and trivia all add up. Consistent users report strong daily totals.",
+    a: "It scales with how active you stay. Chat sessions, clips, and trivia all add up in Ugandan shillings.",
   },
   {
     q: "Is there a joining fee?",

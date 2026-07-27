@@ -1,37 +1,83 @@
 "use client";
 
-import { CircleHelp, MessageCircle, Music2, Play } from "lucide-react";
+import { formatUgx } from "@/lib/money";
+import {
+  Clapperboard,
+  CircleHelp,
+  Dices,
+  Gamepad2,
+  ListChecks,
+  MessageCircle,
+  Music2,
+  Play,
+  Users,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
 
 const ACTIONS = [
   {
     id: "chat",
-    label: "Send a chat",
-    earn: 2.4,
+    label: "Chat with someone",
+    earn: 8500,
     verb: "chatted",
     Icon: MessageCircle,
   },
   {
-    id: "watch",
-    label: "Watch a clip",
-    earn: 1.8,
-    verb: "watched",
+    id: "tiktok",
+    label: "Watch TikTok clips",
+    earn: 3200,
+    verb: "watched clips",
     Icon: Play,
   },
   {
-    id: "trivia",
-    label: "Answer trivia",
-    earn: 3.1,
-    verb: "answered",
-    Icon: CircleHelp,
+    id: "movie",
+    label: "Watch a movie",
+    earn: 15000,
+    verb: "watched a movie",
+    Icon: Clapperboard,
   },
   {
     id: "stream",
-    label: "Stream a track",
-    earn: 2.0,
-    verb: "streamed",
+    label: "Listen to music",
+    earn: 2500,
+    verb: "streamed music",
     Icon: Music2,
+  },
+  {
+    id: "survey",
+    label: "Complete a survey",
+    earn: 18000,
+    verb: "finished a survey",
+    Icon: ListChecks,
+  },
+  {
+    id: "trivia",
+    label: "Play trivia",
+    earn: 12000,
+    verb: "won trivia",
+    Icon: CircleHelp,
+  },
+  {
+    id: "spin",
+    label: "Spin and win",
+    earn: 20000,
+    verb: "spun the wheel",
+    Icon: Dices,
+  },
+  {
+    id: "games",
+    label: "Play a game",
+    earn: 5000,
+    verb: "played a game",
+    Icon: Gamepad2,
+  },
+  {
+    id: "refer",
+    label: "Refer a friend",
+    earn: 10000,
+    verb: "referred a friend",
+    Icon: Users,
   },
 ] as const;
 
@@ -53,12 +99,12 @@ export function EarnPlayground() {
   }, [burst]);
 
   function mint(action: (typeof ACTIONS)[number]) {
-    setBalance((b) => Math.round((b + action.earn) * 10) / 10);
+    setBalance((b) => b + action.earn);
     setBurst(action.earn);
     setPulse(true);
     window.setTimeout(() => setPulse(false), 280);
     setLog((prev) =>
-      [`You ${action.verb} · +$${action.earn.toFixed(1)}`, ...prev].slice(0, 4),
+      [`You ${action.verb} · +${formatUgx(action.earn)}`, ...prev].slice(0, 5),
     );
   }
 
@@ -71,8 +117,8 @@ export function EarnPlayground() {
             Tap. Earn. <em>Smile.</em>
           </h2>
           <p className="section-lead">
-            A tiny demo of the loop. Press an action, watch your balance grow, then
-            jump in for real.
+            Nine ways to demo the loop. Press an action, watch your UGX balance
+            grow, then jump in for real.
           </p>
         </div>
 
@@ -80,11 +126,11 @@ export function EarnPlayground() {
           <div className={`balance-orb ${pulse ? "is-pulse" : ""}`}>
             <span className="balance-label">Demo balance</span>
             <span ref={displayRef} className="balance-value">
-              ${balance.toFixed(1)}
+              {formatUgx(balance)}
             </span>
             {burst !== null && (
               <span className="balance-burst" key={burst + balance}>
-                +${burst.toFixed(1)}
+                +{formatUgx(burst)}
               </span>
             )}
           </div>
@@ -103,7 +149,7 @@ export function EarnPlayground() {
                     <Icon className="ui-icon" aria-hidden strokeWidth={1.75} />
                     <span>{action.label}</span>
                   </span>
-                  <span className="action-earn">+${action.earn.toFixed(1)}</span>
+                  <span className="action-earn">+{formatUgx(action.earn)}</span>
                 </button>
               );
             })}
