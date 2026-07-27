@@ -65,14 +65,16 @@ export function EarnPlayground() {
   return (
     <section className="section playground" id="try">
       <div className="section-inner">
-        <p className="eyebrow">Try it</p>
-        <h2 className="section-title">
-          Tap. Earn. <em>Smile.</em>
-        </h2>
-        <p className="section-lead">
-          A tiny demo of the loop — press an action, watch your balance grow, then
-          jump in for real.
-        </p>
+        <div className="section-intro section-intro--center">
+          <p className="eyebrow">Try it</p>
+          <h2 className="section-title">
+            Tap. Earn. <em>Smile.</em>
+          </h2>
+          <p className="section-lead">
+            A tiny demo of the loop — press an action, watch your balance grow, then
+            jump in for real.
+          </p>
+        </div>
 
         <div className="playground-board">
           <div className={`balance-orb ${pulse ? "is-pulse" : ""}`}>

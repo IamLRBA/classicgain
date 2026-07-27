@@ -19,13 +19,15 @@ export function HowItWorks() {
   return (
     <section className="section how" id="how">
       <div className="section-inner">
-        <p className="eyebrow">How it works</p>
-        <h2 className="section-title">
-          Three steps. <em>Zero fluff.</em>
-        </h2>
-        <p className="section-lead">
-          Organized from signup to payout so you always know what comes next.
-        </p>
+        <div className="section-intro section-intro--center">
+          <p className="eyebrow">How it works</p>
+          <h2 className="section-title">
+            Three steps. <em>Zero fluff.</em>
+          </h2>
+          <p className="section-lead">
+            Organized from signup to payout so you always know what comes next.
+          </p>
+        </div>
 
         <div className="steps">
           {STEPS.map((step, i) => (

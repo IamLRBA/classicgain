@@ -30,7 +30,7 @@ export function Faq() {
   return (
     <section className="section faq" id="faq">
       <div className="section-inner faq-grid">
-        <div>
+        <div className="faq-intro section-intro">
           <p className="eyebrow">FAQ</p>
           <h2 className="section-title">
             Straight answers. <em>No maze.</em>
@@ -38,7 +38,9 @@ export function Faq() {
           <p className="section-lead">
             Skim the essentials, then start when it feels right.
           </p>
-          <MagneticButton>Join {siteName}</MagneticButton>
+          <div className="section-actions">
+            <MagneticButton>Join {siteName}</MagneticButton>
+          </div>
         </div>
 
         <div className="faq-list">
