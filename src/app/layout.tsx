@@ -16,7 +16,7 @@ const body = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: `${siteName} — Earn on your phone`,
+  title: `${siteName} - Earn on your phone`,
   description:
     "Chat, watch, and play to earn. Withdraw to mobile money anytime. Simple, modern earning from your phone.",
 };

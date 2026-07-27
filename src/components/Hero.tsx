@@ -12,7 +12,7 @@ export function Hero() {
         <p className="brand-hero">{siteName}</p>
         <h1>Make your phone pay you back.</h1>
         <p className="hero-sub">
-          Chat, watch, and play — then cash out to mobile money. Simple loop.
+          Chat, watch, and play, then cash out to mobile money. Simple loop.
           Real payouts.
         </p>
         <div className="hero-actions">
@@ -21,7 +21,7 @@ export function Hero() {
         </div>
         <p className="hero-hint">
           <MousePointer2 className="ui-icon" aria-hidden strokeWidth={1.75} />
-          Move or click the scene — the lights follow you.
+          Move or click the scene. The lights follow you.
         </p>
       </div>
     </section>

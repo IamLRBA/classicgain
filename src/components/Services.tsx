@@ -15,7 +15,7 @@ const SERVICES: {
 }[] = [
   {
     title: "Chat & get paid",
-    copy: "Message people who want company. No camera required — just conversation.",
+    copy: "Message people who want company. No camera required, just conversation.",
     meta: "Up to $20 / hr",
     Icon: MessageCircle,
   },
@@ -43,12 +43,14 @@ export function Services() {
   return (
     <section className="section services" id="services">
       <div className="section-inner">
-        <p className="eyebrow">What you do</p>
-        <div className="services-head">
-          <h2 className="section-title">
-            Four ways to earn <em>from one phone</em>
-          </h2>
-          <MagneticButton variant="ghost">Open account</MagneticButton>
+        <div className="section-intro">
+          <p className="eyebrow">What you do</p>
+          <div className="services-head">
+            <h2 className="section-title">
+              Four ways to earn <em>from one phone</em>
+            </h2>
+            <MagneticButton variant="ghost">Open account</MagneticButton>
+          </div>
         </div>
 
         <ol className="service-list">

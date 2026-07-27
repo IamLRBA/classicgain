@@ -8,15 +8,15 @@ import { MagneticButton } from "./MagneticButton";
 const FAQS = [
   {
     q: "How do I get paid?",
-    a: "Payouts go to mobile money on the phone number you register with. Withdraw when you're ready — no artificial daily ceiling on the product side.",
+    a: "Payouts go to mobile money on the phone number you register with. Withdraw when you're ready, with no artificial daily ceiling on the product side.",
   },
   {
     q: "How much can I earn in a day?",
-    a: "It scales with how active you stay. Chat sessions, clips, and trivia all add up — consistent users report strong daily totals.",
+    a: "It scales with how active you stay. Chat sessions, clips, and trivia all add up. Consistent users report strong daily totals.",
   },
   {
     q: "Is there a joining fee?",
-    a: "Yes — a one-time activation fee so your account can go live. After that, you keep earning without recurring platform charges.",
+    a: "Yes. A one-time activation fee so your account can go live. After that, you keep earning without recurring platform charges.",
   },
   {
     q: "Do I need special skills?",
@@ -30,7 +30,7 @@ export function Faq() {
   return (
     <section className="section faq" id="faq">
       <div className="section-inner faq-grid">
-        <div>
+        <div className="faq-intro section-intro">
           <p className="eyebrow">FAQ</p>
           <h2 className="section-title">
             Straight answers. <em>No maze.</em>
@@ -38,7 +38,9 @@ export function Faq() {
           <p className="section-lead">
             Skim the essentials, then start when it feels right.
           </p>
-          <MagneticButton>Join {siteName}</MagneticButton>
+          <div className="section-actions">
+            <MagneticButton>Join {siteName}</MagneticButton>
+          </div>
         </div>
 
         <div className="faq-list">
