@@ -1,13 +1,14 @@
 /**
  * ClassicGain color system
- * Two brand hues only: terracotta (orange) + teal (blue-green).
- * Every shade, surface, and text color is derived from these.
+ * Two brand hues: terracotta (orange) + teal (blue-green) for accents.
+ * Soft surfaces and shadows use light grey, not blue wash.
  */
 
 :root {
   /* Brand hues (OKLCH) */
   --hue-terracotta: 42;
   --hue-teal: 195;
+  --hue-grey: 250;
 
   /* Terracotta: CTAs, highlights, accents */
   --terracotta-soft: oklch(94% 0.04 var(--hue-terracotta));
@@ -16,30 +17,36 @@
   --terracotta-deep: oklch(48% 0.14 var(--hue-terracotta));
   --terracotta-ink: oklch(22% 0.05 var(--hue-terracotta));
 
-  /* Teal / blue-green: brand, structure, type */
-  --teal-soft: oklch(94% 0.035 var(--hue-teal));
+  /* Teal / blue-green: brand text and accents (not soft fills) */
   --teal-light: oklch(72% 0.08 var(--hue-teal));
   --teal: oklch(52% 0.1 var(--hue-teal));
   --teal-deep: oklch(36% 0.08 var(--hue-teal));
   --teal-ink: oklch(22% 0.04 var(--hue-teal));
 
-  /* Surfaces and text (teal-tinted neutrals) */
-  --paper: oklch(97.5% 0.012 var(--hue-teal));
-  --paper-deep: oklch(93% 0.02 var(--hue-teal));
-  --surface: color-mix(in oklch, var(--paper) 70%, white);
-  --ink: var(--teal-ink);
-  --ink-soft: oklch(40% 0.04 var(--hue-teal));
-  --ink-inverse: oklch(96% 0.015 var(--hue-teal));
-  --ink-inverse-soft: oklch(82% 0.03 var(--hue-teal));
-  --line: oklch(78% 0.025 var(--hue-teal));
+  /* Light grey surfaces, shadows, and soft fills */
+  --grey-soft: oklch(95.5% 0.004 var(--hue-grey));
+  --grey: oklch(92% 0.005 var(--hue-grey));
+  --grey-deep: oklch(86% 0.006 var(--hue-grey));
 
-  /* Role aliases: prefer these in components */
+  /* Neutrals (grey, not blue-tinted) */
+  --paper: oklch(98% 0.003 var(--hue-grey));
+  --paper-deep: oklch(94% 0.004 var(--hue-grey));
+  --surface: var(--grey-soft);
+  --ink: var(--teal-ink);
+  --ink-soft: oklch(42% 0.02 var(--hue-grey));
+  --ink-inverse: oklch(97% 0.004 var(--hue-grey));
+  --ink-inverse-soft: oklch(82% 0.01 var(--hue-grey));
+  --line: oklch(84% 0.006 var(--hue-grey));
+
+  /* Role aliases */
   --color-primary: var(--terracotta);
   --color-primary-deep: var(--terracotta-deep);
   --color-primary-soft: var(--terracotta-soft);
   --color-primary-ink: var(--terracotta-ink);
   --color-brand: var(--teal);
   --color-brand-deep: var(--teal-deep);
-  --color-brand-soft: var(--teal-soft);
+  --color-brand-soft: var(--grey-soft);
   --color-brand-light: var(--teal-light);
+  --color-muted: var(--grey);
+  --color-muted-deep: var(--grey-deep);
 }
