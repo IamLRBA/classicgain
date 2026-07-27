@@ -457,7 +457,46 @@ em {
 
 .stats {
   padding-block: clamp(3rem, 7vw, 5rem);
-  border-bottom: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
+}
+
+.section-ink .stat-item {
+  background: color-mix(in oklch, var(--ink-inverse) 6%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+}
+
+.section-ink .stat-value {
+  color: var(--ink-inverse);
+}
+
+.section-ink .stat-label {
+  color: var(--ink-inverse-soft);
+}
+
+.section-ink .faq-item {
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+}
+
+.section-ink .faq-trigger {
+  color: var(--ink-inverse);
+}
+
+.section-ink .faq-panel > p {
+  color: var(--ink-inverse-soft);
+}
+
+.section-ink .faq-icon {
+  background: color-mix(in oklch, var(--ink-inverse) 10%, transparent);
+  color: var(--color-primary-light);
+}
+
+.section-ink .region-flag-link {
+  background: color-mix(in oklch, var(--ink-inverse) 6%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+  color: var(--ink-inverse);
+}
+
+.section-ink .region-flag-link:hover {
+  background: color-mix(in oklch, var(--ink-inverse) 12%, transparent);
 }
 
 .stats-grid {
@@ -628,21 +667,36 @@ em {
   }
 }
 
-.how {
+.section-ink {
   background: var(--ink);
   color: var(--ink-inverse);
 }
 
-.how .eyebrow {
+.section-ink .eyebrow {
   color: var(--color-brand-light);
 }
 
-.how em {
+.section-ink em {
   color: var(--color-primary-light);
 }
 
-.how .section-lead {
+.section-ink .section-lead {
   color: var(--ink-inverse-soft);
+}
+
+.section-ink .btn-ghost {
+  background: transparent;
+  border-color: color-mix(in oklch, var(--ink-inverse) 28%, transparent);
+  color: var(--ink-inverse);
+}
+
+.section-ink .btn-ghost:hover {
+  background: color-mix(in oklch, var(--ink-inverse) 10%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 45%, transparent);
+}
+
+.how {
+  /* Uses shared .section-ink */
 }
 
 .steps {

@@ -8,7 +8,7 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="section stats" aria-label="Platform stats">
+    <section className="section stats section-ink" aria-label="Platform stats">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
           <p className="eyebrow">By the numbers</p>

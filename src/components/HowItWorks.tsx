@@ -17,7 +17,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="section how" id="how">
+    <section className="section how section-ink" id="how">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
           <p className="eyebrow">How it works</p>
