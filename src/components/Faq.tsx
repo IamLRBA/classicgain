@@ -22,13 +22,29 @@ const FAQS = [
     q: "Do I need special skills?",
     a: "No. If you can chat, tap play, and answer simple questions, you're ready.",
   },
+  {
+    q: "Which mobile money networks work?",
+    a: "MTN MoMo and Airtel Money are supported for withdrawals in Uganda. Use the same number you register with.",
+  },
+  {
+    q: "How fast are withdrawals?",
+    a: "Most mobile money payouts land within 24 hours after you request a withdrawal that meets the minimum.",
+  },
+  {
+    q: "Can I earn from outside Uganda?",
+    a: "Yes. ClassicGain works in many countries. Local payout options depend on your registration country.",
+  },
+  {
+    q: "Is my phone number shared publicly?",
+    a: "Your number is used for account access and payouts. Keep it accurate so withdrawals reach you without delays.",
+  },
 ];
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="section faq" id="faq">
+    <section className="section faq section-ink" id="faq">
       <div className="section-inner faq-grid">
         <div className="faq-intro section-intro">
           <p className="eyebrow">FAQ</p>

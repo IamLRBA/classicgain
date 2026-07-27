@@ -281,13 +281,14 @@ em {
 
 .hero h1 {
   margin: 0;
-  max-width: 18ch;
+  max-width: 22ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.55rem, 4.2vw, 2.65rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.15;
   color: var(--ink-soft);
+  text-align: center;
 }
 
 .rotating-phrase {
@@ -362,6 +363,7 @@ em {
   margin-top: 1.75rem;
   pointer-events: auto;
   width: 100%;
+  max-width: 28rem;
 }
 
 .hero-hint {
@@ -379,24 +381,6 @@ em {
   height: 0.95rem;
 }
 
-@media (min-width: 768px) {
-  .hero-content {
-    text-align: left;
-    align-items: flex-start;
-  }
-
-  .hero-actions {
-    justify-content: flex-start;
-  }
-
-  .hero-hint {
-    justify-content: flex-start;
-  }
-
-  .hero h1 {
-    max-width: 14ch;
-  }
-}
 
 @keyframes rise {
   from {
@@ -473,7 +457,46 @@ em {
 
 .stats {
   padding-block: clamp(3rem, 7vw, 5rem);
-  border-bottom: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
+}
+
+.section-ink .stat-item {
+  background: color-mix(in oklch, var(--ink-inverse) 6%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+}
+
+.section-ink .stat-value {
+  color: var(--ink-inverse);
+}
+
+.section-ink .stat-label {
+  color: var(--ink-inverse-soft);
+}
+
+.section-ink .faq-item {
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+}
+
+.section-ink .faq-trigger {
+  color: var(--ink-inverse);
+}
+
+.section-ink .faq-panel > p {
+  color: var(--ink-inverse-soft);
+}
+
+.section-ink .faq-icon {
+  background: color-mix(in oklch, var(--ink-inverse) 10%, transparent);
+  color: var(--color-primary-light);
+}
+
+.section-ink .region-flag-link {
+  background: color-mix(in oklch, var(--ink-inverse) 6%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 16%, transparent);
+  color: var(--ink-inverse);
+}
+
+.section-ink .region-flag-link:hover {
+  background: color-mix(in oklch, var(--ink-inverse) 12%, transparent);
 }
 
 .stats-grid {
@@ -546,12 +569,10 @@ em {
 
 .services .section-intro {
   text-align: center;
-}
-
-@media (min-width: 768px) {
-  .services .section-intro {
-    text-align: left;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
 }
 
 .services-head {
@@ -560,35 +581,20 @@ em {
   align-items: center;
   text-align: center;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .services-head .section-title {
   max-width: 18ch;
-}
-
-@media (min-width: 768px) {
-  .services .section-intro {
-    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
-  }
-
-  .services-head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    text-align: left;
-    width: 100%;
-  }
-
-  .services-head .section-title {
-    text-align: left;
-    margin-inline: 0;
-  }
+  margin-inline: auto;
+  text-align: center;
 }
 
 .service-list {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 52rem;
   border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
 }
 
@@ -661,21 +667,32 @@ em {
   }
 }
 
-.how {
+.section-ink {
   background: var(--ink);
   color: var(--ink-inverse);
 }
 
-.how .eyebrow {
+.section-ink .eyebrow {
   color: var(--color-brand-light);
 }
 
-.how em {
+.section-ink em {
   color: var(--color-primary-light);
 }
 
-.how .section-lead {
+.section-ink .section-lead {
   color: var(--ink-inverse-soft);
+}
+
+.section-ink .btn-ghost {
+  background: transparent;
+  border-color: color-mix(in oklch, var(--ink-inverse) 28%, transparent);
+  color: var(--ink-inverse);
+}
+
+.section-ink .btn-ghost:hover {
+  background: color-mix(in oklch, var(--ink-inverse) 10%, transparent);
+  border-color: color-mix(in oklch, var(--ink-inverse) 45%, transparent);
 }
 
 .steps {
@@ -1066,23 +1083,6 @@ em {
 }
 
 @media (min-width: 768px) {
-  .testimonials-head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    text-align: left;
-  }
-
-  .testimonials-head .section-intro {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .testimonials-head .section-title,
-  .testimonials-head .section-lead {
-    margin-inline: 0;
-  }
-
   .testimonial-card {
     flex-basis: 24rem;
   }
@@ -1103,20 +1103,41 @@ em {
   animation: marquee 32s linear infinite;
 }
 
-.region-marquee a {
+.region-marquee a,
+.region-flag-link {
   display: inline-flex;
-  padding: 0.65rem 1.1rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 1rem 0.55rem 0.65rem;
   border-radius: 999px;
   border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
-  background: color-mix(in oklch, var(--surface) 50%, transparent);
+  background: var(--paper);
   font-size: 0.92rem;
   font-weight: 600;
   white-space: nowrap;
-  transition: background 180ms var(--ease-out);
+  transition:
+    background 180ms var(--ease-out),
+    border-color 180ms var(--ease-out);
 }
 
-.region-marquee a:hover {
-  background: var(--color-brand-soft);
+.region-flag {
+  width: 2.1rem;
+  height: 1.55rem;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  background: var(--grey-soft);
+  flex-shrink: 0;
+}
+
+.region-flag-name {
+  font-size: 0.88rem;
+}
+
+.region-marquee a:hover,
+.region-flag-link:hover {
+  background: var(--grey-soft);
+  border-color: color-mix(in oklch, var(--ink) 18%, transparent);
 }
 
 @keyframes marquee {

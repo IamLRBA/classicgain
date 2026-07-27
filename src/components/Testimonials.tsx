@@ -9,42 +9,42 @@ const TESTIMONIALS = [
     location: "Kampala, Uganda",
     quote:
       "I watch short clips after work anyway. Now those minutes add up and I cash out to MTN without stress.",
-    seed: "sarah-mukasa",
+    photo: "/images/testimonials/sarah-mukasa.svg",
   },
   {
     name: "James Okello",
     location: "Entebbe, Uganda",
     quote:
       "Trivia on the bus and chats at night. My first withdrawal convinced me this was worth sticking with.",
-    seed: "james-okello",
+    photo: "/images/testimonials/james-okello.svg",
   },
   {
     name: "Amara Namukasa",
     location: "Jinja, Uganda",
     quote:
       "I keep music playing while I cook. Small tasks, steady balance, and payouts land on Airtel Money.",
-    seed: "amara-namukasa",
+    photo: "/images/testimonials/amara-namukasa.svg",
   },
   {
     name: "David Ocen",
     location: "Mbarara, Uganda",
     quote:
       "I was unsure at first. After a clean cashout I started treating it like a real side hustle.",
-    seed: "david-ocen",
+    photo: "/images/testimonials/david-ocen.svg",
   },
   {
     name: "Priya Ssentamu",
     location: "Gulu, Uganda",
     quote:
       "Surveys and trivia fit between classes. Flexible, clear, and the support team actually replies.",
-    seed: "priya-ssentamu",
+    photo: "/images/testimonials/priya-ssentamu.svg",
   },
   {
     name: "Brian Ssekandi",
     location: "Wakiso, Uganda",
     quote:
       "Chat sessions pay the best for me. I log in when I have an hour free and watch the balance climb.",
-    seed: "brian-ssekandi",
+    photo: "/images/testimonials/brian-ssekandi.svg",
   },
 ];
 
@@ -90,8 +90,7 @@ export function Testimonials() {
               Voices from <em>Uganda</em>
             </h2>
             <p className="section-lead">
-              Side hustle stories from Kampala to Gulu. Names and quotes are
-              sample content for the layout.
+              Side hustle stories from Kampala to Gulu.
             </p>
           </div>
 
@@ -125,12 +124,12 @@ export function Testimonials() {
       >
         <ul ref={trackRef} className="testimonials-track">
           {TESTIMONIALS.map((item) => (
-            <li key={item.seed} className="testimonial-card">
+            <li key={item.photo} className="testimonial-card">
               <div className="testimonial-top">
                 <img
                   className="testimonial-photo"
-                  src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(item.seed)}&backgroundColor=e5e7eb,d1d5db,f3f4f6`}
-                  alt=""
+                  src={item.photo}
+                  alt={item.name}
                   width={64}
                   height={64}
                 />
