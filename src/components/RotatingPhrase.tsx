@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 
 const PHRASES = [
-  "things you already love",
-  "chats that pay",
-  "videos that earn",
-  "music on the go",
-  "trivia for cash",
-  "tasks on your phone",
+  "Watch Videos Online",
+  "Listen to Songs",
+  "Chat and Get Paid",
+  "Play Trivia Games",
+  "Complete Surveys",
+  "Stream Short Clips",
 ];
 
 export function RotatingPhrase() {

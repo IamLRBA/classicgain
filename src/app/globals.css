@@ -241,18 +241,12 @@ em {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      transparent 20%,
-      color-mix(in oklch, var(--paper) 55%, transparent) 70%,
-      var(--paper) 100%
-    ),
-    radial-gradient(
-      60% 50% at 20% 70%,
-      color-mix(in oklch, var(--color-brand-soft) 65%, transparent),
-      transparent 70%
-    );
+  background: linear-gradient(
+    180deg,
+    transparent 20%,
+    color-mix(in oklch, #ffffff 55%, transparent) 70%,
+    #ffffff 100%
+  );
 }
 
 .hero-content {
@@ -279,23 +273,33 @@ em {
   color: var(--ink);
 }
 
-.hero h1 {
+.hero-title {
   margin: 0;
-  max-width: 22ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 18ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.55rem, 4.2vw, 2.65rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.15;
-  color: var(--ink-soft);
+  color: var(--ink);
   text-align: center;
+}
+
+.hero-title-lead {
+  display: block;
+  color: var(--ink);
 }
 
 .rotating-phrase {
   display: inline-flex;
   align-items: baseline;
+  justify-content: center;
   min-height: 1.2em;
-  color: var(--color-primary-deep);
+  color: var(--ink);
   vertical-align: baseline;
 }
 
@@ -321,7 +325,7 @@ em {
   width: 0.08em;
   height: 0.9em;
   margin-left: 0.12em;
-  background: var(--color-primary);
+  background: var(--ink);
   vertical-align: -0.05em;
   animation: caret-blink 1s steps(1) infinite;
 }
@@ -351,8 +355,9 @@ em {
 .hero-sub {
   margin: 1.1rem 0 0;
   max-width: 38ch;
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: clamp(1rem, 1.6vw, 1.15rem);
+  opacity: 0.78;
 }
 
 .hero-actions {
@@ -373,7 +378,8 @@ em {
   justify-content: center;
   gap: 0.45rem;
   font-size: 0.85rem;
-  color: color-mix(in oklch, var(--ink-soft) 75%, transparent);
+  color: var(--ink);
+  opacity: 0.65;
 }
 
 .hero-hint .ui-icon {

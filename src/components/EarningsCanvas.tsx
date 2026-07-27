@@ -13,12 +13,13 @@ type Particle = {
   rot: number;
   spin: number;
   life: number;
-  hue: number;
+  /** Greyscale lightness for the particle fill/stroke */
+  tone: number;
 };
 
 /**
- * Interactive full-bleed scene: soft orbs and sparks drift and
- * gather toward the cursor. The visual engine of the hero.
+ * Interactive full-bleed scene: grey orbs on a white field,
+ * with a dark-green grid that deepens near the cursor.
  */
 export function EarningsCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,6 +38,7 @@ export function EarningsCanvas() {
     let dpr = 1;
     const pointer = { x: 0, y: 0, active: false };
     const particles: Particle[] = [];
+    const hueInk = readCssHue("--hue-teal", hues.teal);
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -55,14 +57,10 @@ export function EarningsCanvas() {
       }
     }
 
-    const hueTeal = readCssHue("--hue-teal", hues.teal);
-    const hueTerracotta = readCssHue("--hue-terracotta", hues.terracotta);
-
     function makeParticle(x: number, y: number): Particle {
       const roll = Math.random();
       const kind: Particle["kind"] =
         roll < 0.45 ? "orb" : roll < 0.75 ? "ring" : "spark";
-      const useTerracotta = Math.random() > 0.62;
       return {
         x,
         y,
@@ -73,15 +71,15 @@ export function EarningsCanvas() {
         rot: Math.random() * Math.PI * 2,
         spin: (Math.random() - 0.5) * 0.03,
         life: 1,
-        hue: useTerracotta ? hueTerracotta : hueTeal,
+        tone: 62 + Math.random() * 22,
       };
     }
 
     function drawOrb(p: Particle) {
       ctx!.save();
       const g = ctx!.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `oklch(86% 0.1 ${p.hue} / 0.55)`);
-      g.addColorStop(1, `oklch(78% 0.08 ${p.hue} / 0)`);
+      g.addColorStop(0, `oklch(${p.tone}% 0.004 250 / 0.45)`);
+      g.addColorStop(1, `oklch(${p.tone - 8}% 0.004 250 / 0)`);
       ctx!.fillStyle = g;
       ctx!.beginPath();
       ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -93,7 +91,7 @@ export function EarningsCanvas() {
       ctx!.save();
       ctx!.translate(p.x, p.y);
       ctx!.rotate(p.rot);
-      ctx!.strokeStyle = `oklch(62% 0.1 ${p.hue} / 0.35)`;
+      ctx!.strokeStyle = `oklch(${p.tone - 12}% 0.006 250 / 0.4)`;
       ctx!.lineWidth = 1.25;
       ctx!.beginPath();
       ctx!.ellipse(0, 0, p.r, p.r * 0.62, 0, 0, Math.PI * 2);
@@ -103,38 +101,85 @@ export function EarningsCanvas() {
 
     function drawSpark(p: Particle) {
       ctx!.save();
-      ctx!.fillStyle = `oklch(78% 0.14 ${p.hue} / ${0.35 + p.life * 0.4})`;
+      ctx!.fillStyle = `oklch(${p.tone}% 0.005 250 / ${0.3 + p.life * 0.35})`;
       ctx!.beginPath();
       ctx!.arc(p.x, p.y, p.r * 0.35, 0, Math.PI * 2);
       ctx!.fill();
       ctx!.restore();
     }
 
+    function gridAlphaAt(px: number, py: number) {
+      const base = 0.05;
+      if (!pointer.active && reduced) return base;
+
+      let boost = 0;
+      if (pointer.active) {
+        const dist = Math.hypot(px - pointer.x, py - pointer.y);
+        const radius = Math.min(w, h) * 0.42;
+        boost = Math.max(0, 1 - dist / radius);
+        boost = boost * boost;
+      }
+
+      // Soft static wells so the grid is not uniform weight
+      const wellA = Math.hypot(px - w * 0.22, py - h * 0.28);
+      const wellB = Math.hypot(px - w * 0.78, py - h * 0.62);
+      const staticBoost =
+        Math.max(0, 1 - wellA / (Math.min(w, h) * 0.55)) * 0.35 +
+        Math.max(0, 1 - wellB / (Math.min(w, h) * 0.5)) * 0.28;
+
+      return Math.min(0.55, base + boost * 0.42 + staticBoost * 0.18);
+    }
+
+    function drawGrid() {
+      const gap = 48;
+
+      for (let x = 0; x < w; x += gap) {
+        for (let y = 0; y < h; y += gap) {
+          const a1 = gridAlphaAt(x, y + gap / 2);
+          const a2 = gridAlphaAt(x + gap / 2, y);
+
+          ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a1})`;
+          ctx!.lineWidth = 1 + a1 * 1.4;
+          ctx!.beginPath();
+          ctx!.moveTo(x, y);
+          ctx!.lineTo(x, Math.min(y + gap, h));
+          ctx!.stroke();
+
+          ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a2})`;
+          ctx!.lineWidth = 1 + a2 * 1.4;
+          ctx!.beginPath();
+          ctx!.moveTo(x, y);
+          ctx!.lineTo(Math.min(x + gap, w), y);
+          ctx!.stroke();
+        }
+      }
+    }
+
     function frame() {
       ctx!.clearRect(0, 0, w, h);
 
-      const wash = ctx!.createLinearGradient(0, 0, w, h);
-      wash.addColorStop(0, `oklch(96% 0.03 ${hueTeal} / 0.55)`);
-      wash.addColorStop(0.5, `oklch(97% 0.04 ${hueTerracotta} / 0.35)`);
-      wash.addColorStop(1, `oklch(94% 0.04 ${hueTeal} / 0.5)`);
-      ctx!.fillStyle = wash;
+      // Clean white field behind the grid
+      ctx!.fillStyle = "#ffffff";
       ctx!.fillRect(0, 0, w, h);
 
-      ctx!.strokeStyle = `oklch(40% 0.03 ${hueTeal} / 0.06)`;
-      ctx!.lineWidth = 1;
-      const gap = 48;
-      for (let x = 0; x < w; x += gap) {
-        ctx!.beginPath();
-        ctx!.moveTo(x, 0);
-        ctx!.lineTo(x, h);
-        ctx!.stroke();
+      // Soft dark-green wash near cursor (not a full green fill)
+      if (pointer.active && !reduced) {
+        const glow = ctx!.createRadialGradient(
+          pointer.x,
+          pointer.y,
+          0,
+          pointer.x,
+          pointer.y,
+          Math.min(w, h) * 0.38,
+        );
+        glow.addColorStop(0, `oklch(32% 0.06 ${hueInk} / 0.1)`);
+        glow.addColorStop(0.55, `oklch(36% 0.05 ${hueInk} / 0.04)`);
+        glow.addColorStop(1, `oklch(40% 0.04 ${hueInk} / 0)`);
+        ctx!.fillStyle = glow;
+        ctx!.fillRect(0, 0, w, h);
       }
-      for (let y = 0; y < h; y += gap) {
-        ctx!.beginPath();
-        ctx!.moveTo(0, y);
-        ctx!.lineTo(w, y);
-        ctx!.stroke();
-      }
+
+      drawGrid();
 
       for (const p of particles) {
         if (!reduced && pointer.active) {
