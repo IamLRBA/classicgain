@@ -6,6 +6,7 @@ import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Regions } from "@/components/Regions";
 import { Services } from "@/components/Services";
+import { Stats } from "@/components/Stats";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Stats />
         <Services />
         <EarnPlayground />
         <HowItWorks />
