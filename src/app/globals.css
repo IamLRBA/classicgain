@@ -241,18 +241,18 @@ em {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: transparent;
-}
-
-.hero-veil::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: min(48%, 22rem);
-  background: var(--paper);
-  opacity: 0.88;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 20%,
+      color-mix(in oklch, var(--paper) 55%, transparent) 70%,
+      var(--paper) 100%
+    ),
+    radial-gradient(
+      60% 50% at 20% 70%,
+      color-mix(in oklch, var(--color-brand-soft) 65%, transparent),
+      transparent 70%
+    );
 }
 
 .hero-content {
@@ -415,8 +415,7 @@ em {
 }
 
 .services {
-  background: var(--color-brand-soft);
-  border-block: 1px solid color-mix(in oklch, var(--color-brand) 16%, transparent);
+  background: color-mix(in oklch, var(--surface) 70%, var(--paper));
 }
 
 .services .section-intro {
@@ -478,7 +477,7 @@ em {
 }
 
 .service-row:hover {
-  background: color-mix(in oklch, var(--surface) 45%, transparent);
+  background: var(--color-brand-soft);
   padding-inline: 0.65rem;
 }
 
