@@ -785,13 +785,14 @@ em {
 }
 
 .playground-board {
+  --board-pad: clamp(1.25rem, 3vw, 2rem);
   margin-top: 2.5rem;
   display: grid;
   gap: 1.5rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: var(--board-pad);
   border: 2px solid color-mix(in oklch, var(--color-brand) 22%, transparent);
   border-radius: 1.75rem;
   background: var(--paper);
@@ -800,8 +801,43 @@ em {
     10px 10px 0 2px color-mix(in oklch, var(--ink) 10%, transparent);
 }
 
+/* Grid from board top through / just below the demo balance circle */
+.playground-stage {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  margin: calc(-1 * var(--board-pad)) calc(-1 * var(--board-pad)) 0;
+  padding: var(--board-pad) var(--board-pad) 2.75rem;
+  border-radius: 1.65rem 1.65rem 0 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.playground-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    transparent 100%
+  );
+}
+
 .balance-orb {
   position: relative;
+  z-index: 1;
   width: min(100%, 18rem);
   aspect-ratio: 1;
   margin-inline: auto;
@@ -1379,7 +1415,8 @@ em {
   .action-chip,
   .btn-primary,
   .btn-ghost,
-  .whatsapp-float {
+  .whatsapp-float,
+  .playground-grid {
     animation: none !important;
     transition: none !important;
   }
