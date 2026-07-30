@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MagneticButton } from "./MagneticButton";
+import { PlaygroundGrid } from "./PlaygroundGrid";
 
 const ACTIONS = [
   {
@@ -123,16 +124,19 @@ export function EarnPlayground() {
         </div>
 
         <div className="playground-board">
-          <div className={`balance-orb ${pulse ? "is-pulse" : ""}`}>
-            <span className="balance-label">Demo balance</span>
-            <span ref={displayRef} className="balance-value">
-              {formatUgx(balance)}
-            </span>
-            {burst !== null && (
-              <span className="balance-burst" key={burst + balance}>
-                +{formatUgx(burst)}
+          <div className="playground-stage">
+            <PlaygroundGrid />
+            <div className={`balance-orb ${pulse ? "is-pulse" : ""}`}>
+              <span className="balance-label">Demo balance</span>
+              <span ref={displayRef} className="balance-value">
+                {formatUgx(balance)}
               </span>
-            )}
+              {burst !== null && (
+                <span className="balance-burst" key={burst + balance}>
+                  +{formatUgx(burst)}
+                </span>
+              )}
+            </div>
           </div>
 
           <div className="action-rail" role="group" aria-label="Demo earning actions">

@@ -1,3 +1,4 @@
+import { InteractiveGrid } from "./GridBand";
 import { MagneticButton } from "./MagneticButton";
 
 const STEPS = [
@@ -17,7 +18,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="section how section-ink" id="how">
+    <section className="section how section-ink how-grid-shell" id="how">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
           <p className="eyebrow">How it works</p>
@@ -44,6 +45,14 @@ export function HowItWorks() {
         <div className="how-cta">
           <MagneticButton>Register now</MagneticButton>
         </div>
+      </div>
+
+      <div className="how-grid-foot" aria-hidden>
+        <InteractiveGrid
+          className="how-grid-foot-canvas"
+          tone="light"
+          trackRoot=".how-grid-shell"
+        />
       </div>
     </section>
   );

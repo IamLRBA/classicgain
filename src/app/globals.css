@@ -784,14 +784,73 @@ em {
   justify-content: center;
 }
 
+.how-grid-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.how-grid-shell > .section-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.how-grid-foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: calc(var(--section-y) * 1.55);
+  pointer-events: none;
+}
+
+.how-grid-foot-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 32%,
+      #000 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 32%,
+      #000 100%
+    );
+  mask-composite: intersect;
+}
+
 .playground-board {
+  --board-pad: clamp(1.25rem, 3vw, 2rem);
   margin-top: 2.5rem;
   display: grid;
   gap: 1.5rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: var(--board-pad);
   border: 2px solid color-mix(in oklch, var(--color-brand) 22%, transparent);
   border-radius: 1.75rem;
   background: var(--paper);
@@ -800,8 +859,43 @@ em {
     10px 10px 0 2px color-mix(in oklch, var(--ink) 10%, transparent);
 }
 
+/* Grid from board top through / just below the demo balance circle */
+.playground-stage {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  margin: calc(-1 * var(--board-pad)) calc(-1 * var(--board-pad)) 0;
+  padding: var(--board-pad) var(--board-pad) 2.75rem;
+  border-radius: 1.65rem 1.65rem 0 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.playground-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    transparent 100%
+  );
+}
+
 .balance-orb {
   position: relative;
+  z-index: 1;
   width: min(100%, 18rem);
   aspect-ratio: 1;
   margin-inline: auto;
@@ -954,6 +1048,66 @@ em {
   display: flex;
   justify-content: center;
   padding-top: 0.25rem;
+}
+
+/* Coverage + FAQ share one ink block; grid only in the mid gap */
+.ink-grid-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.ink-grid-shell > .section {
+  position: relative;
+  z-index: 1;
+}
+
+.ink-grid-mid {
+  position: relative;
+  z-index: 0;
+  height: calc(var(--section-y) * 1.7);
+  margin-block: calc(var(--section-y) * -0.85);
+  pointer-events: none;
+}
+
+.ink-grid-mid-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    );
+  mask-composite: intersect;
 }
 
 .testimonials {
@@ -1335,6 +1489,38 @@ em {
   color: var(--ink);
 }
 
+.whatsapp-float {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: max(1.1rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 3.35rem;
+  height: 3.35rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  border: 1px solid color-mix(in oklch, var(--ink-inverse) 18%, transparent);
+  transition:
+    transform 160ms var(--ease-out),
+    background 160ms var(--ease-out);
+}
+
+.whatsapp-float:hover {
+  background: var(--color-brand-deep);
+  transform: scale(1.05);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.97);
+}
+
+.whatsapp-float-icon {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1346,7 +1532,11 @@ em {
   .balance-orb,
   .action-chip,
   .btn-primary,
-  .btn-ghost {
+  .btn-ghost,
+  .whatsapp-float,
+  .playground-grid,
+  .ink-grid-mid-canvas,
+  .how-grid-foot-canvas {
     animation: none !important;
     transition: none !important;
   }
