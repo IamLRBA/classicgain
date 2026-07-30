@@ -1,6 +1,7 @@
 import { EarnPlayground } from "@/components/EarnPlayground";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
+import { InkGridMid, InkGridShell } from "@/components/GridBand";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -21,8 +22,11 @@ export default function Home() {
         <EarnPlayground />
         <HowItWorks />
         <Testimonials />
-        <Regions />
-        <Faq />
+        <InkGridShell>
+          <Regions />
+          <InkGridMid />
+          <Faq />
+        </InkGridShell>
       </main>
       <Footer />
       <WhatsAppFloat />
