@@ -1,5 +1,4 @@
 import { siteName } from "@/lib/config";
-import { InteractiveGrid } from "./GridBand";
 import { MagneticButton } from "./MagneticButton";
 
 const STEPS = [
@@ -19,7 +18,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="section how section-ink how-grid-shell" id="why">
+    <section className="section how section-ink" id="why">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
           <p className="eyebrow">Why {siteName}</p>
@@ -47,14 +46,6 @@ export function HowItWorks() {
         <div className="how-cta">
           <MagneticButton>Get in Touch</MagneticButton>
         </div>
-      </div>
-
-      <div className="how-grid-foot" aria-hidden>
-        <InteractiveGrid
-          className="how-grid-foot-canvas"
-          tone="light"
-          trackRoot=".how-grid-shell"
-        />
       </div>
     </section>
   );
