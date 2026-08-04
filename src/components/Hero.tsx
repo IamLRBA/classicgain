@@ -1,8 +1,6 @@
-import { MousePointer2 } from "lucide-react";
 import { siteName } from "@/lib/config";
 import { EarningsCanvas } from "./EarningsCanvas";
 import { MagneticButton } from "./MagneticButton";
-import { RotatingPhrase } from "./RotatingPhrase";
 
 export function Hero() {
   return (
@@ -10,23 +8,20 @@ export function Hero() {
       <EarningsCanvas />
       <div className="hero-veil" aria-hidden />
       <div className="hero-content">
-        <p className="brand-hero">{siteName}</p>
+        <p className="hero-badge">National earning platform</p>
         <h1 className="hero-title">
-          <span className="hero-title-lead">Get paid to:</span>
-          <RotatingPhrase />
+          Built for earners.
+          <br />
+          <span className="hero-title-accent">Engineered for scale.</span>
         </h1>
         <p className="hero-sub">
-          Chat, watch, and play, then cash out to mobile money. Simple loop.
-          Real payouts.
+          {siteName} helps you chat, watch, and play on your phone, then cash
+          out to mobile money. Infrastructure for everyday income.
         </p>
         <div className="hero-actions">
-          <MagneticButton>Tap to start</MagneticButton>
-          <MagneticButton variant="ghost">See how it works</MagneticButton>
+          <MagneticButton>Get in Touch</MagneticButton>
+          <MagneticButton variant="ghost">See platforms</MagneticButton>
         </div>
-        <p className="hero-hint">
-          <MousePointer2 className="ui-icon" aria-hidden strokeWidth={1.75} />
-          Move or click the scene. The lights follow you.
-        </p>
       </div>
     </section>
   );

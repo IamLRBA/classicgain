@@ -7,5 +7,5 @@ import { InteractiveGrid } from "./GridBand";
  * Transparent field so the board paper shows through; fades out via CSS mask.
  */
 export function PlaygroundGrid() {
-  return <InteractiveGrid className="playground-grid" />;
+  return <InteractiveGrid className="playground-grid" tone="light" />;
 }

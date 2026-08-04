@@ -1,3 +1,4 @@
+import { siteName } from "@/lib/config";
 import { InteractiveGrid } from "./GridBand";
 import { MagneticButton } from "./MagneticButton";
 
@@ -18,15 +19,16 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="section how section-ink how-grid-shell" id="how">
+    <section className="section how section-ink how-grid-shell" id="why">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
-          <p className="eyebrow">How it works</p>
+          <p className="eyebrow">Why {siteName}</p>
           <h2 className="section-title">
-            Three steps. <em>Zero fluff.</em>
+            The earner-first <em>growth model</em>
           </h2>
           <p className="section-lead">
-            Organized from signup to payout so you always know what comes next.
+            Independent earners deserve clear infrastructure. Three steps from
+            signup to payout so you always know what comes next.
           </p>
         </div>
 
@@ -43,7 +45,7 @@ export function HowItWorks() {
         </div>
 
         <div className="how-cta">
-          <MagneticButton>Register now</MagneticButton>
+          <MagneticButton>Get in Touch</MagneticButton>
         </div>
       </div>
 
