@@ -11,12 +11,14 @@ const SERVICES: {
   title: string;
   copy: string;
   meta: string;
+  cta?: string;
   Icon: LucideIcon;
 }[] = [
   {
     title: "Chat & get paid",
     copy: "Message people who want company. No camera required, just conversation.",
     meta: "Up to UGX 50,000/hr",
+    cta: "Register to Chat",
     Icon: MessageCircle,
   },
   {
@@ -65,7 +67,14 @@ export function Services() {
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
                 </div>
-                <span className="service-meta">{item.meta}</span>
+                <div className="service-aside">
+                  <span className="service-meta">{item.meta}</span>
+                  {item.cta ? (
+                    <MagneticButton variant="nav" className="service-cta">
+                      {item.cta}
+                    </MagneticButton>
+                  ) : null}
+                </div>
               </li>
             );
           })}
