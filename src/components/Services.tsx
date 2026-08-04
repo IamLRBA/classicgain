@@ -32,6 +32,7 @@ const SERVICES: {
     title: "Answer trivia",
     copy: "Quick challenges that reward focus. Perfect between chats.",
     meta: "Win up to UGX 100,000",
+    cta: "Register to Answer",
     Icon: CircleHelp,
   },
   {
