@@ -17,7 +17,7 @@ const REGIONS = [
 
 export function Regions() {
   return (
-    <section className="section regions">
+    <section className="section regions section-ink" id="countries">
       <div className="section-inner">
         <div className="section-intro section-intro--center">
           <p className="eyebrow">Coverage</p>

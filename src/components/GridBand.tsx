@@ -31,7 +31,8 @@ export function InteractiveGrid({
 
     const layoutRoot = canvas.parentElement ?? canvas;
     const pointerRoot =
-      (trackRoot ? canvas.closest(trackRoot) : null) ?? canvas;
+      ((trackRoot ? canvas.closest(trackRoot) : null) as HTMLElement | null) ??
+      canvas;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let w = 0;
@@ -41,10 +42,10 @@ export function InteractiveGrid({
     const hueInk = readCssHue("--hue-teal", hues.teal);
     const stroke =
       tone === "light"
-        ? (a: number) => `oklch(86% 0.025 ${hueInk} / ${a})`
-        : (a: number) => `oklch(28% 0.05 ${hueInk} / ${a})`;
-    const baseAlpha = tone === "light" ? 0.045 : 0.028;
-    const maxAlpha = tone === "light" ? 0.42 : 0.55;
+        ? (a: number) => `oklch(78% 0.02 ${hueInk} / ${a})`
+        : (a: number) => `oklch(55% 0.015 ${hueInk} / ${a})`;
+    const baseAlpha = tone === "light" ? 0.05 : 0.03;
+    const maxAlpha = tone === "light" ? 0.38 : 0.45;
     /** Stay under typical browser canvas limits (~16k–32k). */
     const MAX_BACKING = 8192;
 

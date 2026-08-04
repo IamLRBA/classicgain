@@ -3,8 +3,8 @@
  * Keep in sync with --hue-terracotta and --hue-teal.
  */
 export const hues = {
-  terracotta: 42,
-  teal: 195,
+  terracotta: 220,
+  teal: 220,
 } as const;
 
 export function readCssHue(

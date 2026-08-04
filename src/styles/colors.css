@@ -1,52 +1,123 @@
 /**
- * ClassicGain color system
- * Two brand hues: terracotta (orange) + teal (blue-green) for accents.
- * Soft surfaces and shadows use light grey, not blue wash.
+ * ClassicGain color system — Affinex Capital–aligned
+ * Dark navy / slate field, white primary actions, muted cool greys.
+ * Tokens mirrored from https://affinexcapital.com/
  */
 
 :root {
-  /* Brand hues (OKLCH) */
-  --hue-terracotta: 42;
-  --hue-teal: 195;
-  --hue-grey: 250;
+  /* Affinex Capital HSL channels (shadcn-style) */
+  --background: 220 20% 6%;
+  --foreground: 0 0% 95%;
+  --card: 220 16% 12%;
+  --card-foreground: 0 0% 95%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 220 20% 6%;
+  --secondary: 220 14% 14%;
+  --secondary-foreground: 0 0% 80%;
+  --muted: 220 14% 14%;
+  --muted-foreground: 220 10% 50%;
+  --accent: 220 14% 18%;
+  --accent-foreground: 0 0% 95%;
+  --border: 220 14% 18%;
+  --input: 220 14% 16%;
+  --ring: 0 0% 40%;
+  --radius: 0.75rem;
 
-  /* Terracotta: CTAs, highlights, accents */
-  --terracotta-soft: oklch(94% 0.04 var(--hue-terracotta));
-  --terracotta-light: oklch(78% 0.12 var(--hue-terracotta));
-  --terracotta: oklch(62% 0.155 var(--hue-terracotta));
-  --terracotta-deep: oklch(48% 0.14 var(--hue-terracotta));
-  --terracotta-ink: oklch(22% 0.05 var(--hue-terracotta));
+  /* Resolved surfaces */
+  --navy-950: hsl(220 22% 4%);
+  --navy-900: hsl(220 20% 6%);
+  --navy-850: hsl(220 20% 8%);
+  --navy-800: hsl(220 16% 12%);
+  --navy-700: hsl(220 14% 14%);
+  --navy-600: hsl(220 14% 18%);
+  --silver-50: hsl(0 0% 95%);
+  --silver-200: hsl(220 10% 65%);
+  --silver-400: hsl(220 10% 50%);
+  --white: #ffffff;
 
-  /* Teal / blue-green: brand text and accents (not soft fills) */
-  --teal-light: oklch(72% 0.08 var(--hue-teal));
-  --teal: oklch(52% 0.1 var(--hue-teal));
-  --teal-deep: oklch(36% 0.08 var(--hue-teal));
-  --teal-ink: oklch(22% 0.04 var(--hue-teal));
+  --grad-hero: linear-gradient(
+    180deg,
+    hsl(220 20% 8%) 0%,
+    hsl(220 20% 6%) 45%,
+    hsl(220 22% 4%) 100%
+  );
+  --grad-main: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+  --grad-text: linear-gradient(90deg, #ffffff 0%, hsl(220 10% 75%) 100%);
+  --grad-card: linear-gradient(
+    145deg,
+    hsl(220 16% 14%) 0%,
+    hsl(220 16% 10%) 100%
+  );
 
-  /* Light grey surfaces, shadows, and soft fills */
-  --grey-soft: oklch(95.5% 0.004 var(--hue-grey));
-  --grey: oklch(92% 0.005 var(--hue-grey));
-  --grey-deep: oklch(86% 0.006 var(--hue-grey));
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 0 1px hsl(220 14% 22%);
+  --radius-sm: 0.5rem;
+  --radius-md: var(--radius);
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
 
-  /* Neutrals (grey, not blue-tinted) */
-  --paper: oklch(98% 0.003 var(--hue-grey));
-  --paper-deep: oklch(94% 0.004 var(--hue-grey));
-  --surface: var(--grey-soft);
-  --ink: var(--teal-ink);
-  --ink-soft: oklch(42% 0.02 var(--hue-grey));
-  --ink-inverse: oklch(97% 0.004 var(--hue-grey));
-  --ink-inverse-soft: oklch(82% 0.01 var(--hue-grey));
-  --line: oklch(84% 0.006 var(--hue-grey));
+  /* Canvas / JS hues (cool navy) */
+  --hue-terracotta: 220;
+  --hue-teal: 220;
+  --hue-grey: 220;
 
-  /* Role aliases */
-  --color-primary: var(--terracotta);
-  --color-primary-deep: var(--terracotta-deep);
-  --color-primary-soft: var(--terracotta-soft);
-  --color-primary-ink: var(--terracotta-ink);
-  --color-brand: var(--teal);
-  --color-brand-deep: var(--teal-deep);
-  --color-brand-soft: var(--grey-soft);
-  --color-brand-light: var(--teal-light);
-  --color-muted: var(--grey);
-  --color-muted-deep: var(--grey-deep);
+  /* Legacy aliases → Capital navy scale */
+  --terracotta-soft: hsl(220 14% 16%);
+  --terracotta-light: hsl(220 10% 70%);
+  --terracotta: hsl(0 0% 100%);
+  --terracotta-deep: hsl(0 0% 88%);
+  --terracotta-ink: hsl(220 20% 6%);
+  --teal-light: hsl(220 10% 70%);
+  --teal: hsl(220 14% 40%);
+  --teal-deep: hsl(220 16% 18%);
+  --teal-ink: hsl(220 20% 6%);
+  --grey-soft: hsl(220 14% 12%);
+  --grey: hsl(220 14% 16%);
+  --grey-deep: hsl(220 14% 20%);
+
+  --paper: var(--navy-900);
+  --paper-deep: var(--navy-850);
+  --surface: hsl(220 16% 12%);
+  --ink: var(--silver-50);
+  --ink-soft: var(--silver-400);
+  --ink-inverse: var(--white);
+  --ink-inverse-soft: hsl(220 10% 70%);
+  --line: hsl(220 14% 18%);
+
+  /* Role aliases — white primary like Affinex Capital */
+  --color-primary: var(--white);
+  --color-primary-deep: hsl(0 0% 90%);
+  --color-primary-soft: hsl(220 14% 16%);
+  --color-primary-light: hsl(220 10% 80%);
+  --color-primary-ink: var(--navy-900);
+  --color-brand: hsl(220 10% 75%);
+  --color-brand-deep: var(--white);
+  --color-brand-soft: hsl(220 14% 14%);
+  --color-brand-light: hsl(220 10% 80%);
+  --color-muted: var(--navy-700);
+  --color-muted-deep: var(--navy-800);
+
+  /* Quiet purple leftovers remapped so old selectors stay safe */
+  --purple-900: var(--navy-900);
+  --purple-800: var(--navy-850);
+  --purple-700: var(--navy-800);
+  --purple-600: var(--navy-700);
+  --purple-500: hsl(220 14% 40%);
+  --purple-400: hsl(220 10% 65%);
+  --purple-300: hsl(220 10% 70%);
+  --purple-200: hsl(220 10% 80%);
+  --purple-100: hsl(0 0% 95%);
+  --violet-600: hsl(220 14% 30%);
+  --indigo-500: hsl(220 14% 35%);
+  --pink-500: hsl(220 10% 70%);
+  --pink-400: hsl(220 10% 75%);
+  --gold: hsl(40 40% 70%);
+  --gray-50: hsl(0 0% 98%);
+  --gray-100: hsl(0 0% 95%);
+  --gray-300: hsl(220 10% 70%);
+  --gray-500: hsl(220 10% 50%);
+  --gray-700: hsl(220 14% 20%);
+  --gray-900: hsl(220 20% 8%);
 }

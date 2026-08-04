@@ -109,7 +109,7 @@ export function EarningsCanvas() {
     }
 
     function gridAlphaAt(px: number, py: number) {
-      const base = 0.028;
+      const base = 0.05;
       if (!pointer.active && reduced) return base;
 
       let boost = 0;
@@ -143,15 +143,15 @@ export function EarningsCanvas() {
           const a1 = gridAlphaAt(x, screenY + gap / 2);
           const a2 = gridAlphaAt(x + gap / 2, screenY);
 
-          ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a1})`;
-          ctx!.lineWidth = 1 + a1 * 1.6;
+          ctx!.strokeStyle = `oklch(72% 0.02 ${hueInk} / ${a1})`;
+          ctx!.lineWidth = 1 + a1 * 1.2;
           ctx!.beginPath();
           ctx!.moveTo(x, y);
           ctx!.lineTo(x, y + gap);
           ctx!.stroke();
 
-          ctx!.strokeStyle = `oklch(28% 0.05 ${hueInk} / ${a2})`;
-          ctx!.lineWidth = 1 + a2 * 1.6;
+          ctx!.strokeStyle = `oklch(72% 0.02 ${hueInk} / ${a2})`;
+          ctx!.lineWidth = 1 + a2 * 1.2;
           ctx!.beginPath();
           ctx!.moveTo(x, y);
           ctx!.lineTo(x + gap, y);
@@ -165,8 +165,8 @@ export function EarningsCanvas() {
     function frame() {
       ctx!.clearRect(0, 0, w, h);
 
-      // Clean white field behind the grid
-      ctx!.fillStyle = "#ffffff";
+      // Affinex Capital navy hero field
+      ctx!.fillStyle = "#0c0e12";
       ctx!.fillRect(0, 0, w, h);
 
       drawGrid();

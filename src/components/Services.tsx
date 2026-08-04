@@ -41,15 +41,15 @@ const SERVICES: {
 
 export function Services() {
   return (
-    <section className="section services" id="services">
+    <section className="section services" id="platforms">
       <div className="section-inner">
         <div className="section-intro">
-          <p className="eyebrow">What you do</p>
+          <p className="eyebrow">Our Platforms</p>
           <div className="services-head">
             <h2 className="section-title">
-              Four ways to earn <em>from one phone</em>
+              Comprehensive solutions for <em>modern earners</em>
             </h2>
-            <MagneticButton variant="ghost">Open account</MagneticButton>
+            <MagneticButton variant="ghost">Get in Touch</MagneticButton>
           </div>
         </div>
 
