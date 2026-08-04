@@ -25,6 +25,7 @@ const SERVICES: {
     title: "Watch short clips",
     copy: "Short videos. Short sessions. Earnings stack while you stay active.",
     meta: "Up to UGX 12,000/day",
+    cta: "Sign Up to Watch",
     Icon: Play,
   },
   {
