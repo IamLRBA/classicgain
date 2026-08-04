@@ -39,6 +39,7 @@ const SERVICES: {
     title: "Stream music",
     copy: "Keep tracks spinning for creators and collect micropayouts as you go.",
     meta: "Up to UGX 8,000/day",
+    cta: "Sign Up to Stream",
     Icon: Music2,
   },
 ];
