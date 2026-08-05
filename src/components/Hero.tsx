@@ -1,5 +1,6 @@
 import { siteName } from "@/lib/config";
 import { MagneticButton } from "./MagneticButton";
+import { RotatingPhrase } from "./RotatingPhrase";
 
 export function Hero() {
   return (
@@ -8,9 +9,8 @@ export function Hero() {
       <div className="hero-content">
         <p className="brand-hero">{siteName}</p>
         <h1 className="hero-title">
-          Built for earners.
-          <br />
-          <span className="text-subtle">Engineered for scale.</span>
+          <span className="hero-title-lead">Get paid to:</span>
+          <RotatingPhrase />
         </h1>
         <div className="divider-line" aria-hidden />
         <p className="hero-sub">
