@@ -299,12 +299,16 @@ em {
 
 .hero-title {
   margin: 0;
-  max-width: 18ch;
+  max-width: 22ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--font-display), "Playfair Display", serif;
   font-size: clamp(2.25rem, 6.5vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.025em;
-  line-height: 1.1;
+  line-height: 1.15;
   color: hsl(var(--foreground));
   text-align: center;
 }
@@ -316,7 +320,9 @@ em {
 .hero-title-lead {
   display: block;
   color: hsl(var(--muted-foreground));
+  font-size: 0.55em;
   font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .rotating-phrase {
@@ -324,7 +330,7 @@ em {
   align-items: baseline;
   justify-content: center;
   min-height: 1.2em;
-  color: hsl(220 10% 75%);
+  color: hsl(var(--foreground));
   vertical-align: baseline;
 }
 
